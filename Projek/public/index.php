@@ -3,6 +3,7 @@ session_start();
 
 include "../app/controller/koneksi.php";
 include "../routes/routes.php";
+include "../config/base.php";
 
 // ================= LOGIN =================
 if (isset($_POST['login'])) {
@@ -65,7 +66,7 @@ if ($page != 'login') {
     <link rel="stylesheet" href="css/style.css">
     
 </head>
-<body>
+<body class="login-page">
 
 <div class="login-box">
     <img src="/img/Cahaya.png" alt="Logo Cahaya Cakra" style="display: center; width: 128px; height: auto;">
