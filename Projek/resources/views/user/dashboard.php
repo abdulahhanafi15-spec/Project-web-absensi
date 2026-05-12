@@ -1,36 +1,135 @@
 <?php
+
 if (!isset($_SESSION)) {
     session_start();
 }
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+
     header("Location: ../../public/index.php");
     exit;
 }
+
+/* ===================================== */
+/* KONEKSI DATABASE */
+/* ===================================== */
+
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "cahaya_cakra"
+);
+
+/* ===================================== */
+/* AMBIL USER LOGIN */
+/* ===================================== */
+
+$username = $_SESSION['username'];
+
+/* ===================================== */
+/* AMBIL DATA PELATIH */
+/* ===================================== */
+
+$query_pelatih = mysqli_query(
+
+    $conn,
+
+    "SELECT pelatih.nama_pelatih
+
+    FROM pelatih
+
+    INNER JOIN users
+    ON pelatih.user_id = users.id
+
+    WHERE users.username = '$username'"
+);
+
+/* FETCH DATA */
+$data_pelatih = mysqli_fetch_assoc(
+    $query_pelatih
+);
+
+/* NAMA PELATIH */
+$nama_pelatih = $data_pelatih['nama_pelatih'];
+
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
+
     <title>Dashboard</title>
+
     <link rel="stylesheet" href="/css/style.css">
+
 </head>
+
 <body>
 
     <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
-        <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+
+        <button class="toggle-btn" onclick="toggleMenu()">
+            ☰
+        </button>
 
         <ul>
-            <li><a href="#"><span>🏠</span><span class="text">Dashboard</span></a></li>
-            <li><a href="#"><span>👥</span><span class="text">Struktur</span></a></li>
-            <li><a href="#"><span>📋</span><span class="text">Karyawan</span></a></li>
-            <li><a href="#"><span>📅</span><span class="text">Absensi</span></a></li>
-            <li><a href="#"><span>📊</span><span class="text">Laporan</span></a></li>
-            <li><a href="#"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
-            <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+
+            <li>
+                <a href="#">
+                    <span>🏠</span>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <span>👥</span>
+                    <span class="text">Struktur</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <span>📋</span>
+                    <span class="text">Karyawan</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <span>📅</span>
+                    <span class="text">Absensi</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <span>📊</span>
+                    <span class="text">Laporan</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <span>⚙️</span>
+                    <span class="text">Pengaturan</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="index.php?page=logout">
+                    <span>🚪</span>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+
         </ul>
+
     </div>
 
     <!-- MAIN -->
@@ -38,27 +137,47 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
 
         <!-- HEADER -->
         <div class="header">
+
             <img src="img/Cahaya.png" alt="Logo 1">
+
             <img src="img/Perpani.png" alt="Logo 2">
+
         </div>
 
         <!-- CONTENT -->
         <div class="content-card">
+
             <h1 style="text-align: center;">
-                <img src="img/Cahaya.png" alt="logo Cahaya Cakra" style="width: 250px; height: auto;"><br>
-                Selamat datang, <?php echo $_SESSION['username']; ?>
+
+                <img
+                    src="img/Cahaya.png"
+                    alt="logo Cahaya Cakra"
+                    style="width: 250px; height: auto;"
+                >
+
+                <br>
+
+                Selamat datang,
+                <?php echo $nama_pelatih; ?>
+
             </h1>
+
             <p>
-                Organisasi ini mengelola sistem absensi berbasis web untuk meningkatkan
-                efisiensi dan transparansi.
+                Organisasi ini mengelola sistem absensi
+                berbasis web untuk meningkatkan efisiensi
+                dan transparansi.
             </p>
+
             <p>
-                Dashboard ini membantu admin memantau aktivitas dan data secara real-time.
+                Dashboard ini membantu admin memantau
+                aktivitas dan data secara real-time.
             </p>
+
         </div>
 
     </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
