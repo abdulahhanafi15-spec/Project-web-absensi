@@ -7,10 +7,13 @@ $conn = mysqli_connect(
     "cahaya_cakra"
 );
 
-$nama = $_POST['nama_pelatih'];
-$nip = $_POST['nip'];
+/* AMBIL DATA FORM */
+$nama     = $_POST['nama_pelatih'];
+$nip      = $_POST['nip'];
+$alamat   = $_POST['alamat'];
+$no_wa    = $_POST['no_wa'];
 $password = md5($_POST['password']);
-$status = $_POST['status'];
+$status   = $_POST['status'];
 
 /* ===================================== */
 /* SIMPAN KE TABEL USERS */
@@ -51,6 +54,8 @@ mysqli_query(
         user_id,
         nama_pelatih,
         nip,
+        alamat,
+        no_wa,
         status
     )
 
@@ -59,6 +64,8 @@ mysqli_query(
         '$user_id',
         '$nama',
         '$nip',
+        '$alamat',
+        '$no_wa',
         '$status'
     )"
 );

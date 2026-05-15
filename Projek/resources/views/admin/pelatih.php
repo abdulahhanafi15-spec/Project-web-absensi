@@ -324,6 +324,32 @@ if (isset($_GET['cari'])) {
 
             </div>
 
+             <!-- ALAMAT -->
+    <div class="form-group">
+
+        <label>Alamat</label>
+
+        <textarea
+            name="alamat"
+            rows="4"
+            required
+        ></textarea>
+
+    </div>
+
+    <!-- NO WA -->
+    <div class="form-group">
+
+        <label>No WhatsApp / Telepon</label>
+
+        <input
+            type="text"
+            name="no_wa"
+            required
+        >
+
+    </div>
+
             <!-- STATUS -->
             <div class="form-group">
 

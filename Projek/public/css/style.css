@@ -27,13 +27,16 @@ body {
     margin-bottom: 20px;
 }
 
-input {
+input,
+textarea,
+select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 /* ========================================= */
@@ -313,6 +316,18 @@ button:hover {
 }
 
 /* ========================================= */
+/* BUTTON KEMBALI */
+/* ========================================= */
+
+.kembali {
+    background: #6b7280;
+}
+
+.kembali:hover {
+    background: #4b5563;
+}
+
+/* ========================================= */
 /* TOMBOL TAMBAH */
 /* ========================================= */
 
@@ -354,6 +369,10 @@ button:hover {
 
     justify-content: center;
     align-items: center;
+
+    overflow-y: auto;
+
+    padding: 20px;
 }
 
 /* SAAT AKTIF */
@@ -369,6 +388,10 @@ button:hover {
 
     width: 450px;
     max-width: 90%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
 
     padding: 30px;
 
@@ -414,7 +437,10 @@ button:hover {
     cursor: pointer;
 }
 
+/* ========================================= */
 /* FORM */
+/* ========================================= */
+
 .form-group {
 
     margin-bottom: 15px;
@@ -427,20 +453,6 @@ button:hover {
     margin-bottom: 5px;
 
     font-weight: bold;
-}
-
-.form-group input,
-.form-group select {
-
-    width: 100%;
-
-    padding: 12px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
-
-    box-sizing: border-box;
 }
 
 /* BUTTON SIMPAN */
@@ -466,6 +478,65 @@ button:hover {
 .btn-simpan:hover {
 
     background: #15803d;
+}
+
+/* ========================================= */
+/* DETAIL PELATIH */
+/* ========================================= */
+
+.detail-container {
+
+    margin-top: 20px;
+}
+
+.detail-item {
+
+    margin-bottom: 20px;
+}
+
+.detail-item label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.detail-item input,
+.detail-item textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    background: #f9fafb;
+
+    box-sizing: border-box;
+}
+
+.detail-item textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+.detail-button {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
 }
 
 /* ========================================= */
@@ -514,4 +585,23 @@ button:hover {
 
         width: 90%;
     }
+
+    .detail-button {
+
+        justify-content: center;
+    }
+}
+
+/* SCROLL MODAL */
+
+.modal-content::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+
+    background: #1e3a8a;
+
+    border-radius: 10px;
 }
