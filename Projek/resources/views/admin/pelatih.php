@@ -86,7 +86,7 @@ if (isset($_GET['cari'])) {
         </li>
 
         <li>
-            <a href="index.php?page=attendance">
+            <a href="index.php?page=absensi">
                 <span>📅</span>
                 <span class="text">Absensi</span>
             </a>
@@ -138,27 +138,20 @@ if (isset($_GET['cari'])) {
         </div>
 
         <!-- SEARCH -->
-        <form method="GET" action="index.php">
+        
+        <div class="search-container">
 
-            <input type="hidden" name="page" value="pelatih_admin">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Cari nama pelatih..."
+                class="search-input"
+                autocomplete="off"
+    >
 
-            <div class="search-container">
+</div>
 
-                <input
-                    type="text"
-                    name="cari"
-                    placeholder="Cari nama pelatih..."
-                    class="search-input"
-                    value="<?= $cari; ?>"
-                >
-
-                <button type="submit" class="search-btn">
-                    Cari
-                </button>
-
-            </div>
-
-        </form>
+</form>
 
         <!-- TABLE -->
         <div class="table-container">
@@ -177,7 +170,7 @@ if (isset($_GET['cari'])) {
 
                 </thead>
 
-                <tbody>
+                <tbody id="tableData">
 
                     <?php
 
@@ -416,6 +409,39 @@ window.onclick = function(event) {
         modal.classList.remove("show");
     }
 }
+
+/* ========================================= */
+/* REALTIME SEARCH */
+/* ========================================= */
+
+const searchInput = document.getElementById(
+    "searchInput"
+);
+
+const tableRows = document.querySelectorAll(
+    "#tableData tr"
+);
+
+/* SEARCH OTOMATIS */
+searchInput.addEventListener("input", function () {
+
+    let keyword = this.value.toLowerCase();
+
+    tableRows.forEach(row => {
+
+        let text = row.innerText.toLowerCase();
+
+        if (text.includes(keyword)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+        }
+    });
+});
+
 
 </script>
 </body>

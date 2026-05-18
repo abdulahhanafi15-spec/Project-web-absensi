@@ -81,7 +81,7 @@ $data = mysqli_fetch_assoc($query);
         </li>
 
         <li>
-            <a href="index.php?page=attendance">
+            <a href="index.php?page=absensi">
                 <span>📅</span>
                 <span class="text">Absensi</span>
             </a>
