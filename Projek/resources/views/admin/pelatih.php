@@ -112,6 +112,7 @@ if (isset($_GET['cari'])) {
                 <span class="text">Logout</span>
             </a>
         </li>
+        <li><a href="index.php?page=penilaian"><span>📊</span><span class="text">penilaian</span></a></li>
 
     </ul>
 

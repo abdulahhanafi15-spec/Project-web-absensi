@@ -31,6 +31,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
             <li><a href="index.php?page=reports"><span>📊</span><span class="text">Laporan</span></a></li>
             <li><a href="index.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
             <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+            <li><a href="index.php?page=penilaian"><span>📊</span><span class="text">penilaian</span></a></li>
     </ul>
 </div>
 
