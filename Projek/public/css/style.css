@@ -548,6 +548,20 @@ button:hover {
     flex-wrap: wrap;
 }
 
+/* SCROLL MODAL */
+
+.modal-content::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+
+    background: #1e3a8a;
+
+    border-radius: 10px;
+}
+
 /* ========================================= */
 /* RESPONSIVE */
 /* ========================================= */
@@ -601,16 +615,3 @@ button:hover {
     }
 }
 
-/* SCROLL MODAL */
-
-.modal-content::-webkit-scrollbar {
-
-    width: 6px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-
-    background: #1e3a8a;
-
-    border-radius: 10px;
-}
