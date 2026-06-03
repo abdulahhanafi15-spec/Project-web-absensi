@@ -40,7 +40,7 @@ $data = mysqli_fetch_assoc($query);
 
 <head>
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Detail Pelatih</title>
 
@@ -53,61 +53,18 @@ $data = mysqli_fetch_assoc($query);
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
 
-    <button class="toggle-btn" onclick="toggleMenu()">
-        ☰
-    </button>
+    <button class="toggle-btn" onclick="toggleMenu()">☰</button>
 
     <ul>
-
-        <li>
-            <a href="index.php?page=admin_dashboard">
-                <span>🏠</span>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="index.php?page=structure">
-                <span>👥</span>
-                <span class="text">Struktur</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="index.php?page=pelatih_admin">
-                <span>📋</span>
-                <span class="text">Karyawan</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="index.php?page=absensi">
-                <span>📅</span>
-                <span class="text">Absensi</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="index.php?page=reports">
-                <span>📊</span>
-                <span class="text">Laporan</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="index.php?page=setting_admin">
-                <span>⚙️</span>
-                <span class="text">Pengaturan</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="index.php?page=logout">
-                <span>🚪</span>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-
+        <li><a href="index.php?page=admin_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="index.php?page=struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="index.php?page=pelatih_admin"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="index.php?page=sekolah_admin"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="index.php?page=absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="index.php?page=laporan"><span>📊</span><span class="text">Laporan</span></a></li>
+        <li><a href="index.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="index.php?page=penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
     </ul>
 
 </div>
