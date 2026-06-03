@@ -268,10 +268,10 @@ if (isset($_GET['cari'])) {
 </div>
 
 <!-- ===================================== -->
-<!-- MODAL TAMBAH PELATIH -->
+<!-- MODAL TAMBAH SEKOLAH -->
 <!-- ===================================== -->
 
-<div id="modalPelatih" class="modal">
+<div id="modalSekolah" class="modal">
 
     <div class="modal-content">
 
@@ -280,45 +280,19 @@ if (isset($_GET['cari'])) {
             &times;
         </span>
 
-        <h2>Tambah Pelatih</h2>
+        <h2>Tambah Sekolah</h2>
 
         <!-- FORM -->
-        <form action="index.php?page=simpan_pelatih" method="POST">
+        <form action="index.php?page=simpan_sekolah" method="POST">
 
             <!-- NAMA -->
             <div class="form-group">
 
-                <label>Nama Pelatih</label>
+                <label>Nama Sekolah</label>
 
                 <input
                     type="text"
-                    name="nama_pelatih"
-                    required
-                >
-
-            </div>
-
-            <!-- NIP -->
-            <div class="form-group">
-
-                <label>NIP</label>
-
-                <input
-                    type="text"
-                    name="nip"
-                    required
-                >
-
-            </div>
-
-            <!-- PASSWORD -->
-            <div class="form-group">
-
-                <label>Password</label>
-
-                <input
-                    type="password"
-                    name="password"
+                    name="nama_sekolah"
                     required
                 >
 
@@ -350,22 +324,16 @@ if (isset($_GET['cari'])) {
 
     </div>
 
-            <!-- STATUS -->
+            <!-- EMAIL -->
             <div class="form-group">
 
-                <label>Status</label>
+                <label>Email</label>
 
-                <select name="status" required>
-
-                    <option value="Aktif">
-                        Aktif
-                    </option>
-
-                    <option value="Nonaktif">
-                        Nonaktif
-                    </option>
-
-                </select>
+                <input
+                    type="email"
+                    name="email"
+                    required
+                >
 
             </div>
 
@@ -392,7 +360,7 @@ if (isset($_GET['cari'])) {
 function openModal() {
 
     document
-        .getElementById("modalPelatih")
+        .getElementById("modalSekolah")
         .classList.add("show");
 }
 
@@ -400,7 +368,7 @@ function openModal() {
 function closeModal() {
 
     document
-        .getElementById("modalPelatih")
+        .getElementById("modalSekolah")
         .classList.remove("show");
 }
 
@@ -408,7 +376,7 @@ function closeModal() {
 window.onclick = function(event) {
 
     let modal = document.getElementById(
-        "modalPelatih"
+        "modalSekolah"
     );
 
     if (event.target === modal) {
