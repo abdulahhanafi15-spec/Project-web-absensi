@@ -34,18 +34,18 @@ if (isset($_GET['cari'])) {
         $query = mysqli_query($conn, "
 
             SELECT
-                siswa.id_siswa,
-                siswa.nama_siswa,
+                murid.id_murid,
+                murid.nama_murid,
                 sekolah.nama_sekolah
 
-            FROM siswa
+            FROM murid
 
             JOIN sekolah
-            ON siswa.id_sekolah = sekolah.id_sekolah
+            ON murid.id_sekolah = sekolah.id_sekolah
 
             WHERE sekolah.nama_sekolah LIKE '%$cari%'
 
-            ORDER BY siswa.nama_siswa ASC
+            ORDER BY murid.nama_murid ASC
 
         ");
 
@@ -54,18 +54,18 @@ if (isset($_GET['cari'])) {
         $query = mysqli_query($conn, "
 
             SELECT
-                siswa.id_siswa,
-                siswa.nama_siswa,
+                murid.id_murid,
+                murid.nama_murid,
                 sekolah.nama_sekolah
 
-            FROM siswa
+            FROM murid
 
             JOIN sekolah
-            ON siswa.id_sekolah = sekolah.id_sekolah
+            ON murid.id_sekolah = sekolah.id_sekolah
 
-            WHERE siswa.nama_siswa LIKE '%$cari%' 
+            WHERE murid.nama_murid LIKE '%$cari%' 
 
-            ORDER BY siswa.nama_siswa ASC
+            ORDER BY murid.nama_murid ASC
 
         ");
     }
@@ -75,16 +75,16 @@ if (isset($_GET['cari'])) {
     $query = mysqli_query($conn, "
 
         SELECT
-            siswa.id_siswa,
-            siswa.nama_siswa,
+            murid.id_murid,
+            murid.nama_murid,
             sekolah.nama_sekolah
 
-        FROM siswa
+        FROM murid
 
         JOIN sekolah
-        ON siswa.id_sekolah = sekolah.id_sekolah
+        ON murid.id_sekolah = sekolah.id_sekolah
 
-        ORDER BY siswa.nama_siswa ASC
+        ORDER BY murid.nama_murid ASC
 
     ");
 }
@@ -95,7 +95,7 @@ if (isset($_GET['cari'])) {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Penilaian Siswa</title>
+    <title>Penilaian Atlet</title>
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -190,99 +190,97 @@ if (isset($_GET['cari'])) {
     <!-- CONTENT -->
     <div class="content-card">
 
-        <!-- JUDUL -->
-        <div class="card-header">
-            <h1>Penilaian Siswa</h1>
-        </div>
+    <!-- JUDUL -->
+    <div class="card-header">
+        <h1>Penilaian Atlet Berprestasi</h1>
+    </div>
 
-        <!-- SEARCH -->
-        <div class="search-container">
+    <!-- SEARCH -->
+    <div class="search-container">
 
-            <select id="filterSearch" class="search-input">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari Sekolah..."
+            class="search-input"
+            autocomplete="off"
+        >
 
-                <option value="nama">
-                    Nama Siswa
-                </option>
+    </div>
 
-                <option value="sekolah">
-                    Asal Sekolah
-                </option>
+    <!-- TABLE -->
+    <div class="table-container">
 
-            </select>
+        <table class="karyawan-table">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Cari data..."
-                class="search-input"
-                autocomplete="off"
-            >
+            <thead>
 
-        </div>
-        <!-- TABLE -->
-        <div class="table-container">
+                <tr>
+                    <th width="10%">No</th>
+                    <th>Nama Sekolah</th>
+                    <th width="20%">Aksi</th>
+                </tr>
 
-            <table class="karyawan-table">
+            </thead>
 
-                <thead>
+            <tbody id="tableData">
 
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Siswa</th>
-                        <th>Asal Sekolah</th>
-                        <th>Aksi</th>
-                    </tr>
+                <?php
 
-                </thead>
+                $query = mysqli_query(
 
-                <tbody id="tableData">
+                    $conn,
 
-                    <?php
+                    "SELECT *
+                    FROM sekolah
+                    ORDER BY nama_sekolah ASC"
 
-                    $no = 1;
+                );
 
-                    while ($data = mysqli_fetch_assoc($query)) {
+                $no = 1;
 
-                    ?>
+                while ($data = mysqli_fetch_assoc($query)) {
 
-                    <tr>
+                ?>
 
-                        <td><?= $no++; ?></td>
+                <tr>
 
-                        <td class="nama-siswa">
-                            <?= $data['nama_siswa']; ?>
-                        </td>
+                    <td>
+                        <?= $no++; ?>
+                    </td>
 
-                        <td class="nama-sekolah">
-                            <?= $data['nama_sekolah']; ?>
-                        </td>
+                    <td class="nama-sekolah">
 
-                        <td>
+                        <?= $data['nama_sekolah']; ?>
+
+                    </td>
+
+                    <td>
+
+                        <a href="index.php?page=detail_penilaian&id=<?= $data['id_sekolah']; ?>">
 
                             <button
                                 type="button"
                                 class="btn detail"
-                                onclick="openModal(
-                                    '<?= $data['id_siswa']; ?>',
-                                    '<?= $data['nama_siswa']; ?>'
-                                )"
                             >
-                                Edit Nilai
+                                Penilaian
                             </button>
 
-                        </td>
+                        </a>
 
-                    </tr>
+                    </td>
 
-                    <?php } ?>
+                </tr>
 
-                </tbody>
+                <?php } ?>
 
-            </table>
+            </tbody>
 
-        </div>
+        </table>
 
     </div>
+
+</div>
 
 </div>
 
@@ -304,17 +302,17 @@ if (isset($_GET['cari'])) {
 
             <input
                 type="hidden"
-                name="id_siswa"
-                id="id_siswa"
+                name="id_murid"
+                id="id_murid"
             >
 
             <div class="form-group">
 
-                <label>Nama Siswa</label>
+                <label>Nama Atlet</label>
 
                 <input
                     type="text"
-                    id="nama_siswa"
+                    id="nama_murid"
                     readonly
                 >
 

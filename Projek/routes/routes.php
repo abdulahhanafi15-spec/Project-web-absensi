@@ -18,4 +18,6 @@ $routes = [
     'penilaian' => '../resources/views/admin/penilaian.php',
     'simpan_penilaian' => '../app/controller/simpan_penilaian.php',
     'sekolah_admin' => '../resources/views/admin/sekolah.php',
+    'detail_penilain' => '../app/controller/detail_penilaian.php',
+    'simpan_penilaian' => '../app/controller/simpan_penilaian',
 ];

@@ -4,26 +4,12 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-
-    header("Location: ../../public/index.php");
-    exit;
-}
-
-/* ===================================== */
-/* KONEKSI DATABASE */
-/* ===================================== */
-
 $conn = mysqli_connect(
     "localhost",
     "root",
     "",
     "cahaya_cakra"
 );
-
-/* ===================================== */
-/* VALIDASI KONEKSI */
-/* ===================================== */
 
 if (!$conn) {
 
@@ -37,81 +23,96 @@ if (!$conn) {
 /* AMBIL DATA FORM */
 /* ===================================== */
 
-$id_siswa      = $_POST['id_siswa'];
+$id_murid = $_POST['id_murid'];
 
-$kedisiplinan  = $_POST['kedisiplinan'];
+$hafalan_jurus = $_POST['hafalan_jurus'];
 
-$kerjasama     = $_POST['kerjasama'];
-
-$keaktifan     = $_POST['keaktifan'];
+$kelugesan_gerak = $_POST['kelugesan_gerak'];
 
 /* ===================================== */
-/* CEK APAKAH SUDAH ADA NILAI */
+/* CEK DATA SUDAH ADA */
 /* ===================================== */
 
 $cek = mysqli_query(
 
     $conn,
 
-    "SELECT * FROM penilaian
-    WHERE id_siswa = '$id_siswa'"
+    "SELECT *
+
+    FROM penilaian_atlet
+
+    WHERE id_murid='$id_murid'"
+
 );
+
+/* ===================================== */
+/* UPDATE */
+/* ===================================== */
 
 if (mysqli_num_rows($cek) > 0) {
 
-    /* ===================================== */
-    /* UPDATE DATA */
-    /* ===================================== */
-
-    $update = mysqli_query(
+    mysqli_query(
 
         $conn,
 
-        "UPDATE penilaian SET
+        "UPDATE penilaian_atlet
 
-            kedisiplinan = '$kedisiplinan',
-            kerjasama    = '$kerjasama',
-            keaktifan    = '$keaktifan'
+        SET
 
-        WHERE id_siswa = '$id_siswa'"
+        hafalan_jurus='$hafalan_jurus',
+
+        kelugesan_gerak='$kelugesan_gerak'
+
+        WHERE id_murid='$id_murid'"
+
     );
 
-} else {
-
-    /* ===================================== */
-    /* SIMPAN DATA BARU */
-    /* ===================================== */
-
-    $simpan = mysqli_query(
-
-        $conn,
-
-        "INSERT INTO penilaian (
-
-            id_siswa,
-            kedisiplinan,
-            kerjasama,
-            keaktifan
-
-        ) VALUES (
-
-            '$id_siswa',
-            '$kedisiplinan',
-            '$kerjasama',
-            '$keaktifan'
-
-        )"
-    );
 }
 
 /* ===================================== */
-/* REDIRECT */
+/* INSERT */
 /* ===================================== */
 
+else {
+
+    mysqli_query(
+
+        $conn,
+
+        "INSERT INTO penilaian_atlet (
+
+            id_murid,
+
+            hafalan_jurus,
+
+            kelugesan_gerak
+
+        )
+
+        VALUES (
+
+            '$id_murid',
+
+            '$hafalan_jurus',
+
+            '$kelugesan_gerak'
+
+        )"
+
+    );
+
+}
+
+/* ===================================== */
+/* KEMBALI KE HALAMAN SEBELUMNYA */
+/* ===================================== */
+
+$id_sekolah = $_POST['id_sekolah'];
+
 header(
-    "Location: index.php?page=penilaian"
+    "Location: index.php?page=detail_penilaian&id=".$id_sekolah
 );
 
 exit;
 
-?>
+exit;

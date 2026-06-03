@@ -1,98 +1,41 @@
 /* ===================================== */
-/* OPEN MODAL */
+/* SEARCH PERGURUAN */
 /* ===================================== */
 
-function openModal(id, nama) {
-
-    document
-        .getElementById("modalNilai")
-        .classList.add("show");
-
-    document.getElementById("id_siswa").value = id;
-
-    document.getElementById("nama_siswa").value = nama;
-}
-
-/* ===================================== */
-/* CLOSE MODAL */
-/* ===================================== */
-
-function closeModal() {
-
-    document
-        .getElementById("modalNilai")
-        .classList.remove("show");
-}
-
-/* ===================================== */
-/* CLOSE SAAT KLIK LUAR MODAL */
-/* ===================================== */
-
-window.onclick = function(event) {
-
-    let modal = document.getElementById(
-        "modalNilai"
-    );
-
-    if (event.target === modal) {
-
-        modal.classList.remove("show");
-    }
-}
-
-/* ===================================== */
-/* REALTIME SEARCH */
-/* ===================================== */
-
-const searchInput = document.getElementById(
+const searchInput =
+document.getElementById(
     "searchInput"
 );
 
-const filterSearch = document.getElementById(
-    "filterSearch"
-);
-
-const tableRows = document.querySelectorAll(
+const tableRows =
+document.querySelectorAll(
     "#tableData tr"
 );
 
-/* SEARCH OTOMATIS */
-searchInput.addEventListener("input", realtimeSearch);
+if(searchInput){
 
-filterSearch.addEventListener("change", realtimeSearch);
+    searchInput.addEventListener(
+        "input",
+        function () {
 
-function realtimeSearch() {
+            let keyword =
+            this.value.toLowerCase();
 
-    let keyword = searchInput.value.toLowerCase();
+            tableRows.forEach(row => {
 
-    let filter = filterSearch.value;
+                let sekolah = row
+                    .querySelector(".nama-sekolah")
+                    .innerText
+                    .toLowerCase();
 
-    tableRows.forEach(row => {
+                row.style.display =
+                sekolah.includes(keyword)
+                ? ""
+                : "none";
 
-        let targetText = "";
+            });
 
-        if (filter === "nama") {
-
-            targetText = row
-                .querySelector(".nama-siswa")
-                .innerText
-                .toLowerCase();
-
-        } else {
-
-            targetText = row
-                .querySelector(".nama-sekolah")
-                .innerText
-                .toLowerCase();
         }
+    );
 
-        if (targetText.includes(keyword)) {
-
-            row.style.display = "";
-
-        } else {
-
-            row.style.display = "none";
-        }
-    });
 }
