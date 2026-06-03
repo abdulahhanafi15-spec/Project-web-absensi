@@ -130,6 +130,13 @@ if (isset($_GET['cari'])) {
         </li>
 
         <li>
+            <a href="index.php?page=sekolah_admin">
+                <span>📋</span>
+                <span class="text">Sekolah</span>
+            </a>
+        </li>
+
+        <li>
             <a href="index.php?page=absensi">
                 <span>📅</span>
                 <span class="text">Absensi</span>

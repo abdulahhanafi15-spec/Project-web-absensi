@@ -141,7 +141,7 @@ if (isset($_GET['cari'])) {
 
         <!-- JUDUL -->
         <div class="card-header">
-            <h1>Data Karyawan / Pelatih</h1>
+            <h1>Data Sekolah</h1>
         </div>
 
         <!-- SEARCH -->

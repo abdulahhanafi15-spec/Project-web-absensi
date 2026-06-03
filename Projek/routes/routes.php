@@ -17,4 +17,5 @@ $routes = [
     'edit_pelatih' => '../app/controller/edit_pelatih.php',
     'penilaian' => '../resources/views/admin/penilaian.php',
     'simpan_penilaian' => '../app/controller/simpan_penilaian.php',
+    'sekolah_admin' => '../resources/views/admin/sekolah.php',
 ];

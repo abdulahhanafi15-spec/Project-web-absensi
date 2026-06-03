@@ -27,6 +27,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
             <li><a href="index.php?page=admin_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
             <li><a href="index.php?page=structure"><span>👥</span><span class="text">Struktur</span></a></li>
             <li><a href="index.php?page=pelatih_admin"><span>📋</span><span class="text">Karyawan</span></a></li>
+            <li><a href="index.php?page=sekolah_admin"><span>📋</span><span class="text">Sekolah</span></a></li>
             <li><a href="index.php?page=attendance"><span>📅</span><span class="text">Absensi</span></a></li>
             <li><a href="index.php?page=reports"><span>📊</span><span class="text">Laporan</span></a></li>
             <li><a href="index.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
