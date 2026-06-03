@@ -158,8 +158,9 @@ button:hover {
 
 .main {
     margin-left: 70px;
-    width: calc(100% - 130px);
+    width: calc(100% - 70px);
     padding: 20px;
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
@@ -195,7 +196,8 @@ button:hover {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-right: 50px;
+    margin-bottom: 20px;
+    padding-top: 100px;
 }
 
 .content-card p {
@@ -490,13 +492,17 @@ button:hover {
 }
 
 /* ========================================= */
-/* DETAIL PELATIH */
+/* DETAIL PAGE */
 /* ========================================= */
 
 .detail-container {
 
+    width: 100%;
+
     margin-top: 20px;
 }
+
+/* DETAIL PELATIH */
 
 .detail-item {
 
@@ -535,6 +541,61 @@ button:hover {
     resize: vertical;
 }
 
+/* DETAIL SEKOLAH */
+
+.detail-box {
+
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+.detail-row {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.detail-row:last-child {
+
+    border-bottom: none;
+}
+
+.detail-label {
+
+    width: 220px;
+
+    min-width: 220px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+    font-size: 15px;
+}
+
+.detail-value {
+
+    flex: 1;
+
+    color: #374151;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    word-break: break-word;
+}
+
+/* BUTTON AREA */
+
 .detail-button {
 
     margin-top: 25px;
@@ -544,6 +605,17 @@ button:hover {
     justify-content: flex-end;
 
     gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.tambah-container {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: flex-end;
 
     flex-wrap: wrap;
 }
@@ -563,7 +635,43 @@ button:hover {
 }
 
 /* ========================================= */
-/* RESPONSIVE */
+/* TABLE IMPROVEMENT */
+/* ========================================= */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.karyawan-table {
+
+    width: 100%;
+
+    min-width: 700px;
+
+    border-collapse: collapse;
+}
+
+.karyawan-table th,
+.karyawan-table td {
+
+    white-space: nowrap;
+}
+
+td .btn {
+
+    margin: 3px;
+}
+
+td a {
+
+    text-decoration: none;
+}
+
+/* ========================================= */
+/* TABLET */
 /* ========================================= */
 
 @media screen and (max-width: 768px) {
@@ -572,46 +680,161 @@ button:hover {
 
         margin-left: 70px;
 
-        width: calc(100% - 90px);
+        width: calc(100% - 70px);
 
         padding: 10px;
     }
 
     .content-card {
 
-        margin-right: 0;
-
-        padding: 20px;
+        padding: 15px;
     }
 
     .header {
 
+        flex-direction: column;
+
+        gap: 10px;
+
         padding-right: 0;
     }
 
-    .search-container {
+    .header img {
 
-        flex-direction: column;
+        width: 60px;
     }
 
-    .search-btn {
+    .card-header h1 {
 
-        width: 100%;
+        font-size: 22px;
     }
 
-    .btn {
+    .search-input {
 
-        margin-top: 5px;
+        font-size: 14px;
     }
 
     .modal-content {
 
-        width: 90%;
+        width: 95%;
+
+        padding: 20px;
+    }
+
+    .detail-row {
+
+        flex-direction: column;
+
+        gap: 5px;
+
+        padding: 12px 0;
+    }
+
+    .detail-label {
+
+        width: 100%;
+
+        min-width: 100%;
+    }
+
+    .detail-value {
+
+        width: 100%;
     }
 
     .detail-button {
 
         justify-content: center;
     }
+
+    .tambah-container {
+
+        justify-content: center;
+    }
+
+    .tambah {
+
+        width: 100%;
+    }
 }
 
+/* ========================================= */
+/* MOBILE */
+/* ========================================= */
+
+@media screen and (max-width: 480px) {
+
+    .sidebar {
+
+        width: 60px;
+    }
+
+    .sidebar:hover,
+    .sidebar.active {
+
+        width: 180px;
+    }
+
+    .main {
+
+        margin-left: 60px;
+
+        width: calc(100% - 60px);
+
+        padding: 8px;
+    }
+
+    .sidebar:hover ~ .main,
+    .sidebar.active ~ .main {
+
+        margin-left: 180px;
+
+        width: calc(100% - 180px);
+    }
+
+    .content-card {
+
+        padding: 15px;
+
+        border-radius: 10px;
+    }
+
+    .card-header h1 {
+
+        font-size: 20px;
+
+        text-align: left;
+    }
+
+    .detail-label,
+    .detail-value {
+
+        font-size: 14px;
+    }
+
+    .karyawan-table th,
+    .karyawan-table td {
+
+        padding: 10px;
+
+        font-size: 13px;
+    }
+
+    .btn {
+
+        font-size: 12px;
+
+        padding: 8px 12px;
+    }
+
+    .detail-button .btn,
+    .tambah-container .btn {
+
+        width: 100%;
+    }
+
+    .modal-content {
+
+        padding: 15px;
+    }
+}

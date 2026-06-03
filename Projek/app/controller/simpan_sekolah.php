@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+/* CEK LOGIN ADMIN */
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+
+    header("Location: ../../public/index.php");
+    exit;
+}
+
+/* KONEKSI */
 $conn = mysqli_connect(
     "localhost",
     "root",
@@ -7,23 +17,41 @@ $conn = mysqli_connect(
     "cahaya_cakra"
 );
 
-/* DATA SEKOLAH */
-$nama_sekolah = $_POST['nama_sekolah'];
-$alamat       = $_POST['alamat'];
-$telepon      = $_POST['telepon'];
-$email        = $_POST['email'];
+/* VALIDASI */
+if (!$conn) {
 
-/* DATA MURID */
-$nama_murid     = $_POST['nama_murid'];
-$jenis_kelamin = $_POST['jenis_kelamin'];
-$kelas          = $_POST['kelas'];
+    die(
+        "Koneksi gagal : "
+        . mysqli_connect_error()
+    );
+}
 
-/* ==========================
-   SIMPAN SEKOLAH
-========================== */
-
-$querySekolah = mysqli_query(
+/* AMBIL DATA */
+$nama_sekolah = mysqli_real_escape_string(
     $conn,
+    $_POST['nama_sekolah']
+);
+
+$alamat = mysqli_real_escape_string(
+    $conn,
+    $_POST['alamat']
+);
+
+$telepon = mysqli_real_escape_string(
+    $conn,
+    $_POST['telepon']
+);
+
+$email = mysqli_real_escape_string(
+    $conn,
+    $_POST['email']
+);
+
+/* SIMPAN */
+mysqli_query(
+
+    $conn,
+
     "INSERT INTO sekolah
     (
         nama_sekolah,
@@ -31,6 +59,7 @@ $querySekolah = mysqli_query(
         telepon,
         email
     )
+
     VALUES
     (
         '$nama_sekolah',
@@ -40,32 +69,11 @@ $querySekolah = mysqli_query(
     )"
 );
 
-/* AMBIL ID SEKOLAH */
-$id_sekolah = mysqli_insert_id($conn);
-
-/* ==========================
-   SIMPAN MURID
-========================== */
-
-$queryMurid = mysqli_query(
-    $conn,
-    "INSERT INTO murid
-    (
-        id_sekolah,
-        nama_murid,
-        jenis_kelamin,
-        kelas
-    )
-    VALUES
-    (
-        '$id_sekolah',
-        '$nama_murid',
-        '$jenis_kelamin',
-        '$kelas'
-    )"
+/* KEMBALI */
+header(
+    "Location: index.php?page=sekolah_admin"
 );
 
-/* REDIRECT */
-header("Location: index.php?page=sekolah");
 exit;
+
 ?>

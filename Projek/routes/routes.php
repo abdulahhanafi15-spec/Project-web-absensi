@@ -19,5 +19,10 @@ $routes = [
     'simpan_penilaian' => '../app/controller/simpan_penilaian.php',
     'sekolah_admin' => '../resources/views/admin/sekolah.php',
     'detail_penilain' => '../app/controller/detail_penilaian.php',
-    'simpan_penilaian' => '../app/controller/simpan_penilaian',
+    'simpan_sekolah' => '../app/controller/simpan_sekolah.php',
+    'hapus_sekolah' => '../app/controller/hapus_sekolah.php',
+    'detail_sekolah' => '../app/controller/detail_sekolah.php',
+    'simpan_murid' => '../app/controller/simpan_murid.php',
+    'hapus_murid' => '../app/controller/hapus_murid.php',
+    'update_sekolah' => '../app/controller/update_sekolah.php',
 ];

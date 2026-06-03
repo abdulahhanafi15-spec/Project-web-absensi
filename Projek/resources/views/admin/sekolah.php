@@ -10,7 +10,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 }
 
 /* KONEKSI DATABASE */
-$conn = mysqli_connect("localhost", "root", "", "cahaya_cakra");
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "cahaya_cakra"
+);
 
 /* VALIDASI KONEKSI */
 if (!$conn) {
@@ -18,21 +23,30 @@ if (!$conn) {
 }
 
 /* ===================================== */
-/* SEARCH */
+/* SEARCH DATA SEKOLAH */
 /* ===================================== */
 
 $cari = "";
 
 if (isset($_GET['cari'])) {
 
-    $cari = $_GET['cari'];
+    $cari = mysqli_real_escape_string(
+        $conn,
+        $_GET['cari']
+    );
 
     $query = mysqli_query(
         $conn,
 
-        "SELECT * FROM pelatih
-        WHERE nama_pelatih LIKE '%$cari%'
-        ORDER BY id DESC"
+        "SELECT
+            sekolah.*,
+            COUNT(murid.id_murid) AS jumlah_murid
+        FROM sekolah
+        LEFT JOIN murid
+            ON sekolah.id_sekolah = murid.id_sekolah
+        WHERE sekolah.nama_sekolah LIKE '%$cari%'
+        GROUP BY sekolah.id_sekolah
+        ORDER BY sekolah.id_sekolah DESC"
     );
 
 } else {
@@ -40,8 +54,14 @@ if (isset($_GET['cari'])) {
     $query = mysqli_query(
         $conn,
 
-        "SELECT * FROM pelatih
-        ORDER BY id DESC"
+        "SELECT
+            sekolah.*,
+            COUNT(murid.id_murid) AS jumlah_murid
+        FROM sekolah
+        LEFT JOIN murid
+            ON sekolah.id_sekolah = murid.id_sekolah
+        GROUP BY sekolah.id_sekolah
+        ORDER BY sekolah.id_sekolah DESC"
     );
 }
 
@@ -139,131 +159,127 @@ if (isset($_GET['cari'])) {
     <!-- CONTENT -->
     <div class="content-card">
 
-        <!-- JUDUL -->
-        <div class="card-header">
-            <h1>Data Sekolah</h1>
-        </div>
+    <!-- JUDUL -->
+    <div class="card-header">
+        <h1>Data Sekolah</h1>
+    </div>
 
-        <!-- SEARCH -->
-        
-        <div class="search-container">
+    <!-- SEARCH -->
+    <div class="search-container">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Cari nama pelatih..."
-                class="search-input"
-                autocomplete="off"
-    >
-
-</div>
-
-</form>
-
-        <!-- TABLE -->
-        <div class="table-container">
-
-            <table class="karyawan-table">
-
-                <thead>
-
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pelatih</th>
-                        <th>NIP</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="tableData">
-
-                    <?php
-
-                    $no = 1;
-
-                    while ($data = mysqli_fetch_assoc($query)) {
-
-                    ?>
-
-                    <tr>
-
-                        <td><?= $no++; ?></td>
-
-                        <td>
-                            <?= $data['nama_pelatih']; ?>
-                        </td>
-
-                        <td>
-                            <?= $data['nip']; ?>
-                        </td>
-
-                        <td>
-
-                            <?php if ($data['status'] == 'Aktif') { ?>
-
-                                <span class="status aktif">
-                                    Aktif
-                                </span>
-
-                            <?php } else { ?>
-
-                                <span class="status nonaktif">
-                                    Nonaktif
-                                </span>
-
-                            <?php } ?>
-
-                        </td>
-
-                        <td>
-
-                            <!-- DETAIL -->
-                            <a href="index.php?page=detail_pelatih&id=<?= $data['id']; ?>">
-
-                                <button type="button" class="btn detail">
-                                    Detail
-                                </button>
-
-                            </a>
-
-                            <!-- HAPUS -->
-                            <a href="index.php?page=hapus_pelatih&id=<?= $data['id']; ?>"
-                               onclick="return confirm('Yakin ingin menghapus data ini?')">
-
-                                <button type="button" class="btn hapus">
-                                    Hapus
-                                </button>
-
-                            </a>
-
-                        </td>
-
-                    </tr>
-
-                    <?php } ?>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <!-- BUTTON TAMBAH -->
-        <div class="tambah-container">
-
-            <button
-                type="button"
-                class="btn tambah"
-                onclick="openModal()"
-            >
-                + Tambah Pelatih
-            </button>
-
-        </div>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari nama sekolah..."
+            class="search-input"
+            autocomplete="off"
+        >
 
     </div>
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+        <table class="karyawan-table">
+
+            <thead>
+
+                <tr>
+                    <th>No</th>
+                    <th>Nama Sekolah</th>
+                    <th>Telepon</th>
+                    <th>Email</th>
+                    <th>Jumlah Murid</th>
+                    <th>Aksi</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="tableData">
+
+                <?php
+
+                $no = 1;
+
+                while ($data = mysqli_fetch_assoc($query)) {
+
+                ?>
+
+                <tr>
+
+                    <td><?= $no++; ?></td>
+
+                    <td>
+                        <?= $data['nama_sekolah']; ?>
+                    </td>
+
+                    <td>
+                        <?= $data['telepon']; ?>
+                    </td>
+
+                    <td>
+                        <?= $data['email']; ?>
+                    </td>
+
+                    <td>
+                        <?= $data['jumlah_murid']; ?>
+                    </td>
+
+                    <td>
+
+                        <!-- DETAIL -->
+                        <a href="index.php?page=detail_sekolah&id=<?= $data['id_sekolah']; ?>">
+
+                            <button
+                                type="button"
+                                class="btn detail"
+                            >
+                                Detail
+                            </button>
+
+                        </a>
+
+                        <!-- HAPUS -->
+                        <a
+                            href="index.php?page=hapus_sekolah&id=<?= $data['id_sekolah']; ?>"
+                            onclick="return confirm('Yakin ingin menghapus sekolah ini?')"
+                        >
+
+                            <button
+                                type="button"
+                                class="btn hapus"
+                            >
+                                Hapus
+                            </button>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                <?php } ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- BUTTON TAMBAH -->
+    <div class="tambah-container">
+
+        <button
+            type="button"
+            class="btn tambah"
+            onclick="openModal()"
+        >
+            + Tambah Sekolah
+        </button>
+
+    </div>
+
+</div>
 
 </div>
 
