@@ -14,6 +14,24 @@ $alamat   = $_POST['alamat'];
 $no_wa    = $_POST['no_wa'];
 $password = md5($_POST['password']);
 $status   = $_POST['status'];
+$role     = $_POST['role']; // admin atau user
+
+/* CEK NIP SUDAH ADA ATAU BELUM */
+$cek = mysqli_query(
+    $conn,
+    "SELECT id FROM users WHERE username='$nip'"
+);
+
+if (mysqli_num_rows($cek) > 0) {
+
+    echo "
+        <script>
+            alert('NIP sudah digunakan!');
+            window.location='index.php?page=pelatih_admin';
+        </script>
+    ";
+    exit;
+}
 
 /* ===================================== */
 /* SIMPAN KE TABEL USERS */
@@ -34,7 +52,7 @@ mysqli_query(
     (
         '$nip',
         '$password',
-        'user'
+        '$role'
     )"
 );
 
@@ -74,5 +92,4 @@ mysqli_query(
 header(
     "Location: index.php?page=pelatih_admin"
 );
-
-?>
+exit;

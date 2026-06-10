@@ -9,6 +9,49 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     exit;
 }
 
+/* ===================================== */
+/* KONEKSI DATABASE */
+/* ===================================== */
+
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "cahaya_cakra"
+);
+
+/* ===================================== */
+/* AMBIL USER LOGIN */
+/* ===================================== */
+
+$username = $_SESSION['username'];
+
+/* ===================================== */
+/* AMBIL DATA PELATIH */
+/* ===================================== */
+
+$query_pelatih = mysqli_query(
+
+    $conn,
+
+    "SELECT pelatih.nama_pelatih
+
+    FROM pelatih
+
+    INNER JOIN users
+    ON pelatih.user_id = users.id
+
+    WHERE users.username = '$username'"
+);
+
+/* FETCH DATA */
+$data_pelatih = mysqli_fetch_assoc(
+    $query_pelatih
+);
+
+/* NAMA PELATIH */
+$nama_pelatih = $data_pelatih['nama_pelatih'];
+
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +108,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
             <br>
 
             Selamat Datang,
-            <?php echo $_SESSION['username']; ?>
+            <?php echo $nama_pelatih; ?>
 
         </h1>
 

@@ -321,6 +321,25 @@ if (isset($_GET['cari'])) {
 
             </div>
 
+            <!-- ROLE -->
+            <div class="form-group">
+
+                <label>Role</label>
+
+                <select name="role" required>
+
+                    <option value="user">
+                        Pelatih
+                    </option>
+
+                    <option value="admin">
+                        Admin
+                    </option>
+
+                </select>
+
+            </div>
+
             <!-- BUTTON -->
             <button type="submit" class="btn-simpan">
                 Simpan Data
