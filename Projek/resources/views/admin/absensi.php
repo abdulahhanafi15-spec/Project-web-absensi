@@ -1,13 +1,23 @@
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
-}
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "cahaya_cakra"
+);
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../../public/index.php");
-    exit;
-}
+$query = mysqli_query($conn,"
+SELECT
+    sekolah.id_sekolah,
+    sekolah.nama_sekolah,
+    COUNT(murid.id_murid) AS jumlah_murid
+FROM sekolah
+LEFT JOIN murid
+ON sekolah.id_sekolah = murid.id_sekolah
+GROUP BY sekolah.id_sekolah
+ORDER BY sekolah.nama_sekolah ASC
+");
 
 ?>
 
@@ -46,11 +56,71 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     </div>
 
     <div class="content-card">
-        <h1>Halaman Struktur</h1>
+        <h2>Data Sekolah</h2>
+
+    <input
+        type="text"
+        id="searchSekolah"
+        placeholder="Cari Sekolah..."
+    >
+
+    <br><br>
+
+    <table class="karyawan-table">
+
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Sekolah</th>
+                <th>Jumlah Murid</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableSekolah">
+
+        <?php
+        $no = 1;
+        while($row = mysqli_fetch_assoc($query)):
+        ?>
+
+            <tr>
+
+                <td><?= $no++ ?></td>
+
+                <td class="nama-sekolah">
+                    <?= $row['nama_sekolah'] ?>
+                </td>
+
+                <td>
+                    <?= $row['jumlah_murid'] ?>
+                </td>
+
+                <td>
+
+                    <a href="index.php?page=detail_absensi&id=<?= $row['id_sekolah'] ?>">
+                        <button
+                                type="button"
+                                class="btn detail"
+                            >
+                        Detail
+                        </button>
+                    </a>
+
+                </td>
+
+            </tr>
+
+        <?php endwhile; ?>
+
+        </tbody>
+
+    </table>
     </div>
 
 </div>
 
 <script src="/js/script.js"></script>
+<script src="/js/search_sekolah.js"></script>
 </body>
 </html>

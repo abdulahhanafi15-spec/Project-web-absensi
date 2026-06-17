@@ -27,4 +27,6 @@ $routes = [
     'update_sekolah' => '../app/controller/update_sekolah.php',
     'update_pelatih' => '../app/controller/update_pelatih.php',
     'update_password' => '../app/controller/update_password.php',
+    'detail_absensi' => '../app/controller/detail_absensi.php',
+    'simpan_absensi' => '../app/controller/simpan_absensi.php',
 ];
