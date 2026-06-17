@@ -21,18 +21,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $username      = $_SESSION['username'];
-    $nama_pelatih  = mysqli_real_escape_string($conn, $_POST['nama_pelatih']);
-    $nip           = mysqli_real_escape_string($conn, $_POST['nip']);
-    $alamat        = mysqli_real_escape_string($conn, $_POST['alamat']);
-    $no_wa         = mysqli_real_escape_string($conn, $_POST['no_wa']);
+    $username_lama = $_SESSION['username'];
 
-    // Ambil ID user yang sedang login
+    $nama_pelatih = mysqli_real_escape_string($conn, $_POST['nama_pelatih']);
+    $nip          = mysqli_real_escape_string($conn, $_POST['nip']);
+    $alamat       = mysqli_real_escape_string($conn, $_POST['alamat']);
+    $no_wa        = mysqli_real_escape_string($conn, $_POST['no_wa']);
+
+    // Ambil ID user yang login
     $user = mysqli_query(
         $conn,
         "SELECT id
          FROM users
-         WHERE username = '$username'"
+         WHERE username = '$username_lama'"
     );
 
     if (mysqli_num_rows($user) == 0) {
@@ -46,10 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $data_user = mysqli_fetch_assoc($user);
-    $user_id = $data_user['id'];
+    $user_id   = $data_user['id'];
 
-    // Update data pelatih berdasarkan foreign key user_id
-    $update = mysqli_query(
+    // Update username pada tabel users menjadi NIP baru
+    $update_user = mysqli_query(
+        $conn,
+        "UPDATE users
+         SET username = '$nip'
+         WHERE id = '$user_id'"
+    );
+
+    // Update data pelatih
+    $update_pelatih = mysqli_query(
         $conn,
         "UPDATE pelatih
          SET
@@ -60,7 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          WHERE user_id = '$user_id'"
     );
 
-    if ($update) {
+    if ($update_user && $update_pelatih) {
+
+        // Update session username agar tidak logout otomatis
+        $_SESSION['username'] = $nip;
 
         echo "
         <script>
