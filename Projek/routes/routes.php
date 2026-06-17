@@ -25,4 +25,6 @@ $routes = [
     'simpan_murid' => '../app/controller/simpan_murid.php',
     'hapus_murid' => '../app/controller/hapus_murid.php',
     'update_sekolah' => '../app/controller/update_sekolah.php',
+    'update_pelatih' => '../app/controller/update_pelatih.php',
+    'update_password' => '../app/controller/update_password.php',
 ];

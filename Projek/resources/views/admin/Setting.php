@@ -180,7 +180,14 @@ $data = mysqli_fetch_assoc($query);
 
         <h2>Edit Data Pelatih</h2>
 
-        <form action="index.php?page=edit_pelatih" method="POST">
+        <form action="index.php?page=update_pelatih" method="POST">
+
+            <!-- ID Pelatih -->
+            <input
+                type="hidden"
+                name="id_pelatih"
+                value="<?= $data['user_id']; ?>"
+            >
 
             <div class="form-group">
 
@@ -189,7 +196,7 @@ $data = mysqli_fetch_assoc($query);
                 <input
                     type="text"
                     name="nama_pelatih"
-                    value="<?= $data['nama_pelatih']; ?>"
+                    value="<?= htmlspecialchars($data['nama_pelatih']); ?>"
                     required
                 >
 
@@ -202,7 +209,7 @@ $data = mysqli_fetch_assoc($query);
                 <input
                     type="text"
                     name="nip"
-                    value="<?= $data['nip']; ?>"
+                    value="<?= htmlspecialchars($data['nip']); ?>"
                     required
                 >
 
@@ -216,7 +223,7 @@ $data = mysqli_fetch_assoc($query);
                     name="alamat"
                     rows="4"
                     required
-                ><?= $data['alamat']; ?></textarea>
+                ><?= htmlspecialchars($data['alamat']); ?></textarea>
 
             </div>
 
@@ -227,7 +234,7 @@ $data = mysqli_fetch_assoc($query);
                 <input
                     type="text"
                     name="no_wa"
-                    value="<?= $data['no_wa']; ?>"
+                    value="<?= htmlspecialchars($data['no_wa']); ?>"
                     required
                 >
 
@@ -257,7 +264,7 @@ $data = mysqli_fetch_assoc($query);
 
         <h2>Ubah Password</h2>
 
-        <form action="index.php?page=ubah_password" method="POST">
+        <form action="index.php?page=update_password" method="POST">
 
             <div class="form-group">
 
