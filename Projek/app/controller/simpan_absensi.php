@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $conn = mysqli_connect(
     "localhost",
     "root",
@@ -9,76 +7,132 @@ $conn = mysqli_connect(
     "cahaya_cakra"
 );
 
+if (!$conn) {
+    die("Koneksi gagal : " . mysqli_connect_error());
+}
+
+/* ==========================================
+   DATA DARI FORM
+========================================== */
+
 $id_murid = $_POST['id_murid'];
-$tanggal  = $_POST['tanggal'];
 
 $p1 = $_POST['p1'];
 $p2 = $_POST['p2'];
 $p3 = $_POST['p3'];
 $p4 = $_POST['p4'];
 
-for($i = 0; $i < count($id_murid); $i++){
+$bulanDipilih = $_POST['bulan']; // contoh : 2026-07
+$id_sekolah = (int)$_POST['id_sekolah'];
+$tanggal = $bulanDipilih . "-01";
 
-    $nilai_absensi =
-        $p1[$i] +
-        $p2[$i] +
-        $p3[$i] +
-        $p4[$i];
+$bulan = date("m", strtotime($tanggal));
+$tahun = date("Y", strtotime($tanggal));
 
-    mysqli_query($conn,"
+/* ==========================================
+   SIMPAN DATA
+========================================== */
+
+for ($i = 0; $i < count($id_murid); $i++) {
+
+    $id = (int)$id_murid[$i];
+
+    $nilaiP1 = (int)$p1[$i];
+    $nilaiP2 = (int)$p2[$i];
+    $nilaiP3 = (int)$p3[$i];
+    $nilaiP4 = (int)$p4[$i];
+
+    $rata = $nilaiP1 + $nilaiP2 + $nilaiP3 + $nilaiP4;
+
+    /*
+    ==========================================
+    CEK DATA BULAN TERSEBUT
+    ==========================================
+    */
+
+        $cek = mysqli_query($conn, "
+
+            SELECT id_absensi
+
+            FROM absensi
+
+            WHERE id_murid='$id'
+
+            AND bulan='$bulan'
+
+            AND tahun='$tahun'
+
+            LIMIT 1
+
+        ");
+
+    if (mysqli_num_rows($cek) > 0) {
+
+        /*
+        ==========================================
+        UPDATE
+        ==========================================
+        */
+
+        $data = mysqli_fetch_assoc($cek);
+
+        mysqli_query($conn, "
+
+        UPDATE absensi SET
+
+            tanggal='$tanggal',
+            bulan='$bulan',
+            tahun='$tahun',
+            p1='$nilaiP1',
+            p2='$nilaiP2',
+            p3='$nilaiP3',
+            p4='$nilaiP4',
+            rata_rata='$rata'
+
+        WHERE id_absensi='".$data['id_absensi']."'
+
+        ");
+
+    } else {
+
+        /*
+        ==========================================
+        INSERT
+        ==========================================
+        */
+
+        mysqli_query($conn, "
+
         INSERT INTO absensi
         (
+
             id_murid,
             tanggal,
+            bulan,
+            tahun,
             p1,
             p2,
             p3,
             p4,
             rata_rata
+
         )
+
         VALUES
         (
-            '{$id_murid[$i]}',
-            '{$tanggal[$i]}',
-            '{$p1[$i]}',
-            '{$p2[$i]}',
-            '{$p3[$i]}',
-            '{$p4[$i]}',
-            '$nilai_absensi'
+
+            '$id',
+            '$tanggal',
+            '$bulan',
+            '$tahun',
+            '$nilaiP1',
+            '$nilaiP2',
+            '$nilaiP3',
+            '$nilaiP4',
+            '$rata'
+
         )
-    ");
 
-    $cek = mysqli_query(
-        $conn,
-        "SELECT * FROM penilaian_atlet
-         WHERE id_murid='{$id_murid[$i]}'"
-    );
-
-    if(mysqli_num_rows($cek) > 0){
-
-        mysqli_query($conn,"
-            UPDATE penilaian_atlet
-            SET absensi='$nilai_absensi'
-            WHERE id_murid='{$id_murid[$i]}'
-        ");
-
-    }else{
-
-        mysqli_query($conn,"
-            INSERT INTO penilaian_atlet
-            (
-                id_murid,
-                hafalan_jurus,
-                kelugesan_gerak,
-                absensi
-            )
-            VALUES
-            (
-                '{$id_murid[$i]}',
-                0,
-                0,
-                '$nilai_absensi'
-            )
         ");
 
     }
@@ -86,11 +140,13 @@ for($i = 0; $i < count($id_murid); $i++){
 }
 
 echo "
+
 <script>
 
-alert('Absensi berhasil disimpan');
+alert('Absensi berhasil disimpan.');
 
-window.location='index.php?page=absensi';
+window.location='index.php?page=detail_absensi&id=".$id_sekolah."&bulan=".$bulanDipilih."';
 
 </script>
+
 ";

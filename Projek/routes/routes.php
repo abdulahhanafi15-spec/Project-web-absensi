@@ -29,4 +29,6 @@ $routes = [
     'update_password' => '../app/controller/update_password.php',
     'detail_absensi' => '../app/controller/detail_absensi.php',
     'simpan_absensi' => '../app/controller/simpan_absensi.php',
+    'generate_pdf_absensi' => '../app/controller/generate_pdf_absensi.php',
+    'generate_pdf_nilai' => '../app/controller/generate_pdf_nilai.php'
 ];
