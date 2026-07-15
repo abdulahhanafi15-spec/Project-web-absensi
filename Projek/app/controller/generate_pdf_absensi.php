@@ -128,13 +128,13 @@ $pdf->Image($root . "/public/img/Perpani.png", 178, 8, 20);
 ========================== */
 
 $pdf->SetFont("Arial", "B", 15);
-$pdf->Cell(0, 7, "YAYASAN CAHAYA CAKRA", 0, 1, "C");
+$pdf->Cell(0, 7, "CAHAYA CAKRA ARCHERY CLUB", 0, 1, "C");
 
 $pdf->SetFont("Arial", "B", 12);
-$pdf->Cell(0, 6, "PERSATUAN PANAHAN INDONESIA", 0, 1, "C");
+$pdf->Cell(0, 6, "LAPORAN ABSENSI ATLET", 0, 1, "C");
 
 $pdf->SetFont("Arial", "", 11);
-$pdf->Cell(0, 6, "LAPORAN ABSENSI ATLET", 0, 1, "C");
+$pdf->Cell(0, 6, "Tajurhalang, Tajur Halang, Bogor", 0, 1, "C");
 
 $pdf->Line(10, 35, 200, 35);
 
