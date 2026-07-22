@@ -2,11 +2,9 @@
 
 $routes = [
     'login' => '../public/index.php',
-    'admin_dashboard' => '../resources/views/admin/dashboard.php',
-    'user_dashboard' => '../resources/views/user/dashboard.php',
     'logout' => '../app/controller/logout.php',
+    'admin_dashboard' => '../resources/views/admin/dashboard.php',
     'setting_admin' => '../resources/views/admin/Setting.php',
-    'setting_user' => '../resources/views/user/Setting.php',
     'pelatih_admin' => '../resources/views/admin/pelatih.php',
     'struktur' => '../resources/views/admin/struktur.php',
     'absensi' => '../resources/views/admin/absensi.php',
@@ -30,5 +28,14 @@ $routes = [
     'detail_absensi' => '../app/controller/detail_absensi.php',
     'simpan_absensi' => '../app/controller/simpan_absensi.php',
     'generate_pdf_absensi' => '../app/controller/generate_pdf_absensi.php',
-    'generate_pdf_nilai' => '../app/controller/generate_pdf_nilai.php'
+    'generate_pdf_nilai' => '../app/controller/generate_pdf_nilai.php',
+    'user_dashboard' => '../resources/views/user/dashboard.php',
+    'user_setting' => '../resources/views/user/Setting.php',
+    'user_absensi' => '../resources/views/user/absensi.php',
+    'user_pelatih' => '../resources/views/user/pelatih.php',
+    'user_penilaian' => '../resources/views/user/penilaian.php',
+    'user_sekolah' => '../resources/views/user/sekolah.php',
+    'user_struktur' => '../resources/views/user/struktur.php',
+    'detail_sekolah_user' => '../app/controller/detail_sekolah_user.php',
+    'detail_penilaian_user' => '../app/controller/detail_penilaian_user.php',
 ];
