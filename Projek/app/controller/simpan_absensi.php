@@ -26,7 +26,7 @@ $bulanDipilih = $_POST['bulan']; // contoh : 2026-07
 $id_sekolah = (int)$_POST['id_sekolah'];
 $tanggal = $bulanDipilih . "-01";
 
-$bulan = date("m", strtotime($tanggal));
+$bulan = (int)date("n", strtotime($tanggal));
 $tahun = date("Y", strtotime($tanggal));
 
 /* ==========================================

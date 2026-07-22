@@ -4,6 +4,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../../public/index.php");
+    exit;
+}
+
 $conn = mysqli_connect(
     "localhost",
     "root",
@@ -11,7 +16,20 @@ $conn = mysqli_connect(
     "cahaya_cakra"
 );
 
-$id_sekolah = $_GET['id'];
+$id_sekolah = intval($_GET['id']);
+
+/* =====================================
+   FILTER BULAN & TAHUN
+===================================== */
+
+$bulan = isset($_GET['bulan'])
+    ? intval($_GET['bulan'])
+    : date('n');
+
+$tahun = isset($_GET['tahun'])
+    ? intval($_GET['tahun'])
+    : date('Y');
+
 
 $sekolah = mysqli_fetch_assoc(
 
@@ -20,7 +38,9 @@ $sekolah = mysqli_fetch_assoc(
         $conn,
 
         "SELECT *
+
         FROM sekolah
+
         WHERE id_sekolah='$id_sekolah'"
 
     )
@@ -41,42 +61,54 @@ $query_topsis = mysqli_query(
 
         m.id_murid,
         m.nama_murid,
-
         p.hafalan_jurus,
         p.kelugesan_gerak,
-        p.absensi
 
-    FROM murid m
+        IFNULL(a.rata_rata,0) AS absensi
+        FROM murid m
+        LEFT JOIN penilaian_atlet p
+        ON
 
-    LEFT JOIN penilaian_atlet p
+        m.id_murid=p.id_murid
 
-    ON m.id_murid = p.id_murid
+        AND p.bulan='$bulan'
+        AND p.tahun='$tahun'
+        LEFT JOIN absensi a
+        ON
 
-    WHERE m.id_sekolah='$id_sekolah'
+        m.id_murid=a.id_murid
 
-    ORDER BY m.nama_murid ASC"
+        AND a.bulan='$bulan'
+        AND a.tahun='$tahun'
+        WHERE
+
+        m.id_sekolah='$id_sekolah'
+
+        ORDER BY
+
+        m.nama_murid ASC"
 
 );
 
 while($row = mysqli_fetch_assoc($query_topsis)){
 
+    $hafalan = floatval($row['hafalan_jurus'] ?? 0);
+
+    $gerak = floatval($row['kelugesan_gerak'] ?? 0);
+
+    $absensi = floatval($row['absensi'] ?? 0);
+
     $data_topsis[] = [
 
-        'id_murid' => $row['id_murid'],
+        'id_murid'      => $row['id_murid'],
 
-        'nama_murid' => $row['nama_murid'],
+        'nama_murid'    => $row['nama_murid'],
 
-        'c1' => floatval(
-            $row['hafalan_jurus'] ?? 0
-        ),
+        'c1'            => $hafalan,
 
-        'c2' => floatval(
-            $row['kelugesan_gerak'] ?? 0
-        ),
+        'c2'            => $gerak,
 
-        'c3' => floatval(
-            $row['absensi'] ?? 0
-        )
+        'c3'            => $absensi
 
     ];
 
@@ -143,6 +175,7 @@ foreach($data_topsis as $d){
 
     $terbobot[] = [
 
+        'id_murid' => $d['id_murid'],
         'nama_murid' => $d['nama_murid'],
 
         'c1' => $d['c1'],
@@ -290,23 +323,19 @@ foreach($terbobot as $key => $d){
 
 $ranking_topsis = $terbobot;
 
-usort(
+foreach($ranking_topsis as &$r){
 
-    $ranking_topsis,
+    $r['nilai_akhir'] = round(
 
-    function($a,$b){
+        $r['preferensi'],
 
-        return
+        4
 
-        $b['preferensi']
+    );
 
-        <=>
+}
 
-        $a['preferensi'];
-
-    }
-
-);
+unset($r);
 
 ?>
 
@@ -377,6 +406,88 @@ usort(
                 <?= $sekolah['nama_sekolah']; ?>
 
             </strong>
+
+            <hr>
+
+        <form method="GET">
+
+        <input
+        type="hidden"
+        name="page"
+        value="detail_penilaian">
+
+        <input
+        type="hidden"
+        name="id"
+        value="<?= $id_sekolah; ?>">
+
+
+        <label>Bulan</label>
+
+        <select
+        name="bulan">
+
+        <?php
+
+        for($i=1;$i<=12;$i++){
+
+        ?>
+
+        <option
+        value="<?= $i; ?>"
+
+        <?= $bulan==$i ? 'selected' : ''; ?>
+
+        >
+
+        <?= $i; ?>
+
+        </option>
+
+        <?php } ?>
+
+        </select>
+
+
+        <label>Tahun</label>
+
+        <select
+        name="tahun">
+
+        <?php
+
+        for($t=date('Y')-2;$t<=date('Y')+2;$t++){
+
+        ?>
+
+        <option
+
+        value="<?= $t; ?>"
+
+        <?= $tahun==$t ? 'selected' : ''; ?>
+
+        >
+
+        <?= $t; ?>
+
+        </option>
+
+        <?php } ?>
+
+        </select>
+
+
+        <button
+        type="submit"
+        class="btn tambah">
+
+        Tampilkan
+
+        </button>
+
+        </form>
+
+        <br>
 
         </p>
 
@@ -452,44 +563,51 @@ usort(
 
                         $conn,
 
-                        "SELECT
-
-                        m.*,
+                        "SELECT m.*,
 
                         p.hafalan_jurus,
+
                         p.kelugesan_gerak,
-                        p.absensi
 
+                        IFNULL(a.rata_rata,0) AS absensi
                         FROM murid m
-
                         LEFT JOIN penilaian_atlet p
+                        ON
 
-                        ON m.id_murid = p.id_murid
+                        m.id_murid=p.id_murid
 
-                        WHERE m.id_sekolah='$id_sekolah'
+                        AND p.bulan='$bulan'
+                        AND p.tahun='$tahun'
+                        LEFT JOIN absensi a
+                        ON
 
-                        ORDER BY m.nama_murid ASC"
+                        m.id_murid=a.id_murid
 
+                        AND a.bulan='$bulan'
+                        AND a.tahun='$tahun'
+                        WHERE
+
+                        m.id_sekolah='$id_sekolah'
+
+                        ORDER BY
+
+                        m.nama_murid ASC"
                     );
 
                     $no = 1;
 
                     while($data = mysqli_fetch_assoc($query)){
 
-                        $rata =
+                    $hafalan = intval($data['hafalan_jurus'] ?? 0);
 
-                        (
-                            ($data['hafalan_jurus'] ?? 0)
+                    $gerak = intval($data['kelugesan_gerak'] ?? 0);
 
-                            +
+                    $absensi = intval($data['absensi'] ?? 0);
 
-                            ($data['kelugesan_gerak'] ?? 0)
-
-                            +
-
-                            ($data['absensi'] ?? 0)
-
-                        ) / 3;
+                    $rata = round(
+                        ($hafalan + $gerak + $absensi) / 3,
+                        2
+                    );
 
                     ?>
 
@@ -539,7 +657,8 @@ usort(
                             <?php
 
                             if(
-                                $data['hafalan_jurus'] != null
+                            $data['hafalan_jurus'] !== null &&
+                            $data['kelugesan_gerak'] !== null
                             ){
 
                                 echo '
@@ -579,15 +698,10 @@ usort(
                                 class="btn detail"
 
                                 onclick="openModal(
-
-                                    '<?= $data['id_murid']; ?>',
-
-                                    '<?= $data['nama_murid']; ?>',
-
-                                    '<?= $data['hafalan_jurus']; ?>',
-
-                                    '<?= $data['kelugesan_gerak']; ?>'
-
+                                '<?= $data['id_murid']; ?>',
+                                '<?= htmlspecialchars($data['nama_murid'], ENT_QUOTES); ?>',
+                                '<?= $data['hafalan_jurus'] ?? 0; ?>',
+                                '<?= $data['kelugesan_gerak'] ?? 0; ?>'
                                 )"
 
                             >
@@ -616,6 +730,16 @@ usort(
             Ranking Sementara
 
         </h2>
+
+        <h3>
+
+        Periode Penilaian
+
+        <?= $bulan; ?>/<?= $tahun; ?>
+
+        </h3>
+
+        <br>
 
         <div class="table-container">
 
@@ -663,11 +787,11 @@ usort(
 
                             <?= number_format(
 
-                                $r['preferensi'],
+                                $r['nilai_akhir'],
 
                                 4
 
-                            ); ?>
+                                ); ?>
 
                         </td>
 
@@ -1253,6 +1377,16 @@ usort(
                 name="id_sekolah"
                 value="<?= $id_sekolah; ?>"
             >
+
+            <input
+                type="hidden"
+                name="bulan"
+                value="<?= $bulan; ?>">
+
+            <input
+                type="hidden"
+                name="tahun"
+                value="<?= $tahun; ?>">
 
             <div class="form-group">
 

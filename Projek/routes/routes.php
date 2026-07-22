@@ -38,4 +38,5 @@ $routes = [
     'user_struktur' => '../resources/views/user/struktur.php',
     'detail_sekolah_user' => '../app/controller/detail_sekolah_user.php',
     'detail_penilaian_user' => '../app/controller/detail_penilaian_user.php',
+    'user_detail_absensi' => '../app/controller/detail_absensi_user.php',
 ];

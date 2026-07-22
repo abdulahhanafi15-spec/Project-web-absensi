@@ -107,7 +107,7 @@ ORDER BY sekolah.nama_sekolah ASC
 
                 <td>
 
-                    <a href="index.php?page=detail_absensi&id=<?= $row['id_sekolah'] ?>">
+                    <a href="index.php?page=user_detail_absensi&id=<?= $row['id_sekolah'] ?>">
                         <button
                                 type="button"
                                 class="btn detail"

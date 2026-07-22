@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const btnCetak = document.getElementById("btnCetak");
 
+    if (!btnCetak) {
+        return;
+    }
+
     btnCetak.addEventListener("click", function () {
 
         const jenis = document.getElementById("jenisLaporan").value;
@@ -13,6 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        if (jenis === "") {
+            alert("Silahkan pilih jenis laporan.");
+            return;
+        }
+
         if (periode === "") {
             alert("Silahkan pilih periode.");
             return;
@@ -20,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const data = periode.split("-");
 
-        const tahun = data[0];
+        const tahun = parseInt(data[0]);
         const bulan = parseInt(data[1]);
 
         let url = "";
@@ -33,18 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 "&bulan=" + bulan +
                 "&tahun=" + tahun;
 
-        } else if (jenis === "nilai") {
+        } else {
 
             url =
                 "index.php?page=generate_pdf_nilai" +
                 "&id=" + sekolah +
                 "&bulan=" + bulan +
                 "&tahun=" + tahun;
-
-        } else {
-
-            alert("Silahkan pilih jenis laporan.");
-            return;
 
         }
 

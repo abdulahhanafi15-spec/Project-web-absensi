@@ -79,9 +79,6 @@ SELECT
     murid.nama_murid,
     murid.kelas,
 
-    absensi.tanggal,
-    absensi.bulan,
-    absensi.tahun,
     absensi.p1,
     absensi.p2,
     absensi.p3,
@@ -90,16 +87,17 @@ SELECT
 
 FROM murid
 
-INNER JOIN absensi
+LEFT JOIN absensi
+
 ON murid.id_murid = absensi.id_murid
+
+AND absensi.bulan='$bulan'
+
+AND absensi.tahun='$tahun'
 
 WHERE
 
-    murid.id_sekolah='$id_sekolah'
-
-    AND absensi.bulan='$bulan'
-
-    AND absensi.tahun='$tahun'
+murid.id_sekolah='$id_sekolah'
 
 ORDER BY murid.nama_murid ASC
 
@@ -198,19 +196,34 @@ $no = 1;
 
 while ($row = mysqli_fetch_assoc($query)) {
 
-    $p1 = ($row['p1'] == 25) ? "H" : "TH";
-    $p2 = ($row['p2'] == 25) ? "H" : "TH";
-    $p3 = ($row['p3'] == 25) ? "H" : "TH";
-    $p4 = ($row['p4'] == 25) ? "H" : "TH";
+    if ($row['p1'] === null) {
 
-    $pdf->Cell(10, 8, $no++, 1, 0, "C");
-    $pdf->Cell(55, 8, $row['nama_murid'], 1);
-    $pdf->Cell(18, 8, $row['kelas'], 1, 0, "C");
-    $pdf->Cell(15, 8, $p1, 1, 0, "C");
-    $pdf->Cell(15, 8, $p2, 1, 0, "C");
-    $pdf->Cell(15, 8, $p3, 1, 0, "C");
-    $pdf->Cell(15, 8, $p4, 1, 0, "C");
-    $pdf->Cell(25, 8, $row['rata_rata'], 1, 1, "C");
+        $p1 = "-";
+        $p2 = "-";
+        $p3 = "-";
+        $p4 = "-";
+        $nilai = "-";
+
+    } else {
+
+        $p1 = ($row['p1'] == 25) ? "H" : "TH";
+        $p2 = ($row['p2'] == 25) ? "H" : "TH";
+        $p3 = ($row['p3'] == 25) ? "H" : "TH";
+        $p4 = ($row['p4'] == 25) ? "H" : "TH";
+
+        $nilai = $row['rata_rata'];
+
+    }
+
+    $pdf->Cell(10,8,$no++,1,0,"C");
+    $pdf->Cell(55,8,$row['nama_murid'],1);
+    $pdf->Cell(18,8,$row['kelas'],1,0,"C");
+    $pdf->Cell(15,8,$p1,1,0,"C");
+    $pdf->Cell(15,8,$p2,1,0,"C");
+    $pdf->Cell(15,8,$p3,1,0,"C");
+    $pdf->Cell(15,8,$p4,1,0,"C");
+    $pdf->Cell(25,8,$nilai,1,1,"C");
+
 }
 
 /* ==========================

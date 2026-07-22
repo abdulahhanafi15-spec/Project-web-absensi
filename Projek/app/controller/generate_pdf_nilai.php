@@ -27,6 +27,28 @@ if(!$conn){
 
 $id_sekolah = intval($_GET['id']);
 
+$bulan = isset($_GET['bulan'])
+    ? intval($_GET['bulan'])
+    : date('n');
+
+$tahun = isset($_GET['tahun'])
+    ? intval($_GET['tahun'])
+    : date('Y');
+
+$namaBulan = [
+    1 => "Januari",
+    2 => "Februari",
+    3 => "Maret",
+    4 => "April",
+    5 => "Mei",
+    6 => "Juni",
+    7 => "Juli",
+    8 => "Agustus",
+    9 => "September",
+    10 => "Oktober",
+    11 => "November",
+    12 => "Desember"
+];
 /* ==========================
    DATA SEKOLAH
 ========================== */
@@ -45,22 +67,35 @@ WHERE id_sekolah='$id_sekolah'
    DATA PENILAIAN
 ========================== */
 
-$query = mysqli_query($conn,"
+$query = mysqli_query($conn, "
 
 SELECT
 
-murid.nama_murid,
-murid.kelas,
+    murid.nama_murid,
+    murid.kelas,
 
-penilaian_atlet.hafalan_jurus,
-penilaian_atlet.kelugesan_gerak,
-penilaian_atlet.absensi
+    penilaian_atlet.hafalan_jurus,
+    penilaian_atlet.kelugesan_gerak,
+
+    IFNULL(absensi.rata_rata,0) AS absensi
 
 FROM murid
 
-INNER JOIN penilaian_atlet
+LEFT JOIN penilaian_atlet
 
 ON murid.id_murid = penilaian_atlet.id_murid
+
+AND penilaian_atlet.bulan='$bulan'
+
+AND penilaian_atlet.tahun='$tahun'
+
+LEFT JOIN absensi
+
+ON murid.id_murid = absensi.id_murid
+
+AND absensi.bulan='$bulan'
+
+AND absensi.tahun='$tahun'
 
 WHERE murid.id_sekolah='$id_sekolah'
 
@@ -124,6 +159,11 @@ $pdf->Cell(5,7,":");
 $pdf->Cell(120,7,$sekolah['telepon']);
 $pdf->Ln();
 
+$pdf->Cell(35,7,"Periode");
+$pdf->Cell(5,7,":");
+$pdf->Cell(120,7,$namaBulan[$bulan]." ".$tahun);
+$pdf->Ln();
+
 $pdf->Cell(35,7,"Tanggal Cetak");
 $pdf->Cell(5,7,":");
 $pdf->Cell(120,7,date("d-m-Y"));
@@ -154,17 +194,21 @@ $no = 1;
 
 while($row = mysqli_fetch_assoc($query)){
 
+    $hafalan = $row['hafalan_jurus'] ?? "-";
+    $kelugesan = $row['kelugesan_gerak'] ?? "-";
+    $absensi = $row['absensi'] ?? "-";
+
     $pdf->Cell(10,8,$no++,1,0,"C");
 
     $pdf->Cell(60,8,$row['nama_murid'],1);
 
     $pdf->Cell(20,8,$row['kelas'],1,0,"C");
 
-    $pdf->Cell(35,8,$row['hafalan_jurus'],1,0,"C");
+    $pdf->Cell(35,8,$hafalan,1,0,"C");
 
-    $pdf->Cell(35,8,$row['kelugesan_gerak'],1,0,"C");
+    $pdf->Cell(35,8,$kelugesan,1,0,"C");
 
-    $pdf->Cell(30,8,$row['absensi'],1,1,"C");
+    $pdf->Cell(30,8,$absensi,1,1,"C");
 
 }
 

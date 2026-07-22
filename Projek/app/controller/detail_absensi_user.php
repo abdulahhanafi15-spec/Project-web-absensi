@@ -11,10 +11,6 @@ if (!$conn) {
     die("Koneksi gagal : " . mysqli_connect_error());
 }
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../../public/index.php");
-    exit;
-}
 
 /* =====================================
    ID SEKOLAH
@@ -129,14 +125,13 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
     <button class="toggle-btn" onclick="toggleMenu()">☰</button>
 
     <ul>
-        <li><a href="index.php?page=admin_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
-        <li><a href="index.php?page=struktur"><span>👥</span><span class="text">Struktur</span></a></li>
-        <li><a href="index.php?page=pelatih_admin"><span>📋</span><span class="text">Karyawan</span></a></li>
-        <li><a href="index.php?page=sekolah_admin"><span>🏫</span><span class="text">Sekolah</span></a></li>
-        <li><a href="index.php?page=absensi"><span>📅</span><span class="text">Absensi</span></a></li>
-        <li><a href="index.php?page=laporan"><span>📊</span><span class="text">Laporan</span></a></li>
-        <li><a href="index.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
-        <li><a href="index.php?page=penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="index.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="index.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="index.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="index.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="index.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="index.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="index.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
         <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
     </ul>
 

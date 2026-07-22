@@ -1,9 +1,5 @@
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
-}
-
 $conn = mysqli_connect(
     "localhost",
     "root",
@@ -12,107 +8,125 @@ $conn = mysqli_connect(
 );
 
 if (!$conn) {
-
-    die(
-        "Koneksi gagal : " .
-        mysqli_connect_error()
-    );
+    die("Koneksi gagal : " . mysqli_connect_error());
 }
 
-/* ===================================== */
-/* AMBIL DATA FORM */
-/* ===================================== */
 
-$id_murid = $_POST['id_murid'];
+/* ======================================
+   DATA DARI FORM
+====================================== */
 
-$hafalan_jurus = $_POST['hafalan_jurus'];
+$id_murid         = intval($_POST['id_murid']);
+$id_sekolah       = intval($_POST['id_sekolah']);
 
-$kelugesan_gerak = $_POST['kelugesan_gerak'];
+$hafalan_jurus    = intval($_POST['hafalan_jurus']);
+$kelugesan_gerak  = intval($_POST['kelugesan_gerak']);
 
-/* ===================================== */
-/* CEK DATA SUDAH ADA */
-/* ===================================== */
+$bulan            = intval($_POST['bulan']);
+$tahun            = intval($_POST['tahun']);
 
-$cek = mysqli_query(
 
-    $conn,
+/* ======================================
+   CEK DATA PENILAIAN
+====================================== */
 
-    "SELECT *
+$cek = mysqli_query($conn, "
 
-    FROM penilaian_atlet
+SELECT *
 
-    WHERE id_murid='$id_murid'"
+FROM penilaian_atlet
 
-);
+WHERE
 
-/* ===================================== */
-/* UPDATE */
-/* ===================================== */
+id_murid='$id_murid'
 
-if (mysqli_num_rows($cek) > 0) {
+AND bulan='$bulan'
 
-    mysqli_query(
+AND tahun='$tahun'
 
-        $conn,
+");
 
-        "UPDATE penilaian_atlet
 
-        SET
+/* ======================================
+   UPDATE
+====================================== */
 
-        hafalan_jurus='$hafalan_jurus',
+if(mysqli_num_rows($cek) > 0){
 
-        kelugesan_gerak='$kelugesan_gerak'
+    mysqli_query($conn, "
 
-        WHERE id_murid='$id_murid'"
+    UPDATE penilaian_atlet
 
-    );
+    SET
 
-}
+    hafalan_jurus='$hafalan_jurus',
 
-/* ===================================== */
-/* INSERT */
-/* ===================================== */
+    kelugesan_gerak='$kelugesan_gerak'
 
-else {
+    WHERE
 
-    mysqli_query(
+    id_murid='$id_murid'
 
-        $conn,
+    AND bulan='$bulan'
 
-        "INSERT INTO penilaian_atlet (
+    AND tahun='$tahun'
 
-            id_murid,
-
-            hafalan_jurus,
-
-            kelugesan_gerak
-
-        )
-
-        VALUES (
-
-            '$id_murid',
-
-            '$hafalan_jurus',
-
-            '$kelugesan_gerak'
-
-        )"
-
-    );
+    ");
 
 }
 
-/* ===================================== */
-/* KEMBALI KE HALAMAN SEBELUMNYA */
-/* ===================================== */
 
-$id_sekolah = $_POST['id_sekolah'];
+/* ======================================
+   INSERT
+====================================== */
 
-header(
-    "Location: index.php?page=detail_penilaian&id=".$id_sekolah
-);
+else{
+
+    mysqli_query($conn, "
+
+    INSERT INTO penilaian_atlet
+
+    (
+
+        id_murid,
+
+        bulan,
+
+        tahun,
+
+        hafalan_jurus,
+
+        kelugesan_gerak
+
+    )
+
+    VALUES
+
+    (
+
+        '$id_murid',
+
+        '$bulan',
+
+        '$tahun',
+
+        '$hafalan_jurus',
+
+        '$kelugesan_gerak'
+
+    )
+
+    ");
+
+}
+
+
+/* ======================================
+   KEMBALI
+====================================== */
+
+header("Location: index.php?page=detail_penilaian&id=".$id_sekolah."&bulan=".$bulan."&tahun=".$tahun);
 
 exit;
 
-exit;
+?>
