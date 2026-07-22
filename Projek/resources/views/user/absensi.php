@@ -74,7 +74,7 @@ ORDER BY sekolah.nama_sekolah ASC
     >
 
     <br><br>
-
+<div class="table-container">
     <table class="karyawan-table">
 
         <thead>
@@ -125,6 +125,7 @@ ORDER BY sekolah.nama_sekolah ASC
         </tbody>
 
     </table>
+</div>
     </div>
 
 </div>

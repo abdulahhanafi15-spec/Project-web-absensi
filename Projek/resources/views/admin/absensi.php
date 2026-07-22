@@ -67,23 +67,33 @@ ORDER BY sekolah.nama_sekolah ASC
     <div class="content-card">
         <h2>Data Sekolah</h2>
 
+    <!-- SEARCH -->
+<div class="search-container">
+
     <input
         type="text"
         id="searchSekolah"
         placeholder="Cari Sekolah..."
+        class="search-input"
+        autocomplete="off"
     >
 
-    <br><br>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
 
     <table class="karyawan-table">
 
         <thead>
+
             <tr>
                 <th>No</th>
                 <th>Nama Sekolah</th>
                 <th>Jumlah Murid</th>
                 <th>Aksi</th>
             </tr>
+
         </thead>
 
         <tbody id="tableSekolah">
@@ -108,12 +118,13 @@ ORDER BY sekolah.nama_sekolah ASC
                 <td>
 
                     <a href="index.php?page=detail_absensi&id=<?= $row['id_sekolah'] ?>">
+
                         <button
-                                type="button"
-                                class="btn detail"
-                            >
-                        Detail
+                            type="button"
+                            class="btn detail">
+                            Detail
                         </button>
+
                     </a>
 
                 </td>
@@ -125,7 +136,6 @@ ORDER BY sekolah.nama_sekolah ASC
         </tbody>
 
     </table>
-    </div>
 
 </div>
 

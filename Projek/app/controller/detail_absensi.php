@@ -207,6 +207,8 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
             value="<?= $id_sekolah; ?>"
         >
 
+
+    <div class="table-container">
         <table class="karyawan-table">
 
         <thead>
@@ -382,6 +384,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
         </tbody>
 
                 </table>
+    </div>
 
                 <br>
 

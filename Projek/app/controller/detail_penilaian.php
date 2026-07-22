@@ -806,7 +806,7 @@ unset($r);
         <!-- BUTTON KEMBALI -->
         <div class="detail-button">
 
-            <a href="index.php?page=user_penilaian">
+            <a href="index.php?page=penilaian">
 
                 <button
                     type="button"

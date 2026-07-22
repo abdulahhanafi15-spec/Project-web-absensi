@@ -243,7 +243,7 @@ if (isset($_GET['cari'])) {
 
         <h2>Input Penilaian</h2>
 
-        <form action="index.php?page=simpan_penilaian" method="POST">
+        <form action="index.php?page=user_simpan_penilaian" method="POST">
 
             <input
                 type="hidden"

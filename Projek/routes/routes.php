@@ -39,4 +39,6 @@ $routes = [
     'detail_sekolah_user' => '../app/controller/detail_sekolah_user.php',
     'detail_penilaian_user' => '../app/controller/detail_penilaian_user.php',
     'user_detail_absensi' => '../app/controller/detail_absensi_user.php',
+    'simpan_absensi_user' => '../app/controller/simpan_absensi_user.php',
+    'user_simpan_penilaian' => '../app/controller/simpan_penilaian_user.php',
 ];

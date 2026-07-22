@@ -186,7 +186,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
         </div>
 
         <form
-            action="index.php?page=simpan_absensi"
+            action="index.php?page=simpan_absensi_user"
             method="POST"
         >
 
@@ -202,6 +202,8 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
             value="<?= $id_sekolah; ?>"
         >
 
+    <div class="table-container">
+    
         <table class="karyawan-table">
 
         <thead>
@@ -377,11 +379,11 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
         </tbody>
 
                 </table>
-
+    </div>
                 <br>
 
                 <!-- BUTTON KEMBALI -->
-                <a href="index.php?page=absensi">
+                <a href="index.php?page=user_absensi">
 
                     <button
                         type="button"
