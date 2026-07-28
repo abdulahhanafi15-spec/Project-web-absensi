@@ -71,7 +71,7 @@ if ($page != 'login') {
 </head>
 <body class="login-page">
 
-<div class="login-box">
+<div class="login-box2">
     <img src="/img/Cahaya.png" alt="Logo Cahaya Cakra" style="display: center; width: 128px; height: auto;">
     
     <h2>Login</h2>
