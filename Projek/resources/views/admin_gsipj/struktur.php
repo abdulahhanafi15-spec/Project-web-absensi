@@ -1,0 +1,56 @@
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../../public/login_GSIPJ.php");
+    exit;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur</title>
+    <link rel="stylesheet" href="/css/style1.css">
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+
+    <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+
+    <ul>
+        <li><a href="login_GSIPJ.php?page=admin_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="login_GSIPJ.php?page=struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="login_GSIPJ.php?page=pelatih_admin"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="login_GSIPJ.php?page=sekolah_admin"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="login_GSIPJ.php?page=absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="login_GSIPJ.php?page=laporan"><span>📊</span><span class="text">Laporan</span></a></li>
+        <li><a href="login_GSIPJ.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="login_GSIPJ.php?page=penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="login_GSIPJ.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <img src="img/GSIPJ.png" alt="Logo 1">
+        <img src="img/ipsi.png" alt="Logo 2">
+    </div>
+
+    <div class="content-card">
+        <h1>Halaman Struktur</h1>
+    </div>
+
+</div>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

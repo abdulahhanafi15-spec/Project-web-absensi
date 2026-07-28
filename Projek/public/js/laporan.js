@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (jenis === "absensi") {
 
             url =
-                "index.php?page=generate_pdf_absensi" +
+                "login_cahaya.php?page=generate_pdf_absensi" +
                 "&id=" + sekolah +
                 "&bulan=" + bulan +
                 "&tahun=" + tahun;
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             url =
-                "index.php?page=generate_pdf_nilai" +
+                "login_cahaya.php?page=generate_pdf_nilai" +
                 "&id=" + sekolah +
                 "&bulan=" + bulan +
                 "&tahun=" + tahun;

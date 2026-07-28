@@ -24,8 +24,8 @@ include "../config/base.php";
     <div class="login-box">
         <a href="login_cahaya.php">
             <img src="/img/Cahaya.png" alt="Logo Cahaya Cakra" style="display:block; margin:auto; width:128px; height:auto;">
-        </a>
         <h2>Login Cahaya Cakra Archery</h2>
+        </a>
     </div>
 
     <div class="login-box">

@@ -2,7 +2,7 @@
 session_start();
 
 include "../app/controller/koneksi2.php";
-include "../routes/routes.php";
+include "../routes/routes_gsipj.php";
 include "../config/base.php";
 
 // ================= LOGIN =================
@@ -18,9 +18,9 @@ if (isset($_POST['login'])) {
         $_SESSION['role'] = $data['role'];
 
         if ($data['role'] == 'admin') {
-            header("Location: index.php?page=admin_dashboard");
+            header("Location: login_GSIPJ.php?page=admin_dashboard");
         } else {
-            header("Location: index.php?page=user_dashboard");
+            header("Location: login_GSIPJ.php?page=user_dashboard");
         }
         exit;
     } else {
@@ -35,7 +35,7 @@ if ($page != 'login') {
 
     // logout boleh tanpa login
     if ($page != 'logout' && !isset($_SESSION['role'])) {
-        header("Location: index.php");
+        header("Location: login_GSIPJ.php");
         exit;
     }
 
@@ -64,9 +64,9 @@ if ($page != 'login') {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absensi Cahaya Cakra Archery</title>
-    <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Absensi Gerak Silat Inti Putra Jakarta</title>
+    <link rel="icon" href="favicon1.ico">
+    <link rel="stylesheet" href="css/style1.css">
     
 </head>
 <body class="login-page">
