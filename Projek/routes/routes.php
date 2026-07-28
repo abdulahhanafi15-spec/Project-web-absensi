@@ -41,4 +41,5 @@ $routes = [
     'user_detail_absensi' => '../app/controller/detail_absensi_user.php',
     'simpan_absensi_user' => '../app/controller/simpan_absensi_user.php',
     'user_simpan_penilaian' => '../app/controller/simpan_penilaian_user.php',
+    'login_cahaya' => '../public/login_cahaya.php',
 ];

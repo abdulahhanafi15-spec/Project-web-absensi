@@ -5,28 +5,7 @@ include "../app/controller/koneksi.php";
 include "../routes/routes.php";
 include "../config/base.php";
 
-// ================= LOGIN =================
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
 
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
-    $data = mysqli_fetch_assoc($query);
-
-    if ($data) {
-        $_SESSION['username'] = $data['username'];
-        $_SESSION['role'] = $data['role'];
-
-        if ($data['role'] == 'admin') {
-            header("Location: index.php?page=admin_dashboard");
-        } else {
-            header("Location: index.php?page=user_dashboard");
-        }
-        exit;
-    } else {
-        $error = "Username atau password salah!";
-    }
-}
 
 // ================= ROUTING =================
 $page = $_GET['page'] ?? 'login';
@@ -71,18 +50,22 @@ if ($page != 'login') {
 </head>
 <body class="login-page">
 
-<div class="login-box">
-    <img src="/img/Cahaya.png" alt="Logo Cahaya Cakra" style="display: center; width: 128px; height: auto;">
-    
-    <h2>Login</h2>
+<div style="display:flex; justify-content:center; gap:50px; flex-wrap:wrap; align-items:flex-start; padding-top:100px;">
 
-    <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+    <div class="login-box">
+        <a href="index.php?page=login_cahaya">
+            <img src="/img/Cahaya.png" alt="Logo Cahaya Cakra" style="display:block; margin:auto; width:128px; height:auto;">
+        </a>
+        <h2>Login Cahaya Cakra Archery</h2>
+    </div>
 
-    <form method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit" name="login">Login</button>
-    </form>
+    <div class="login-box">
+        <a href="index.php?page=login_cahaya">
+            <img src="/img/Cahaya.png" alt="Logo Cahaya Cakra" style="display:block; margin:auto; width:128px; height:auto;">
+        </a>
+        <h2>Login Cahaya Cakra Archery</h2>
+    </div>
+
 </div>
 
 </body>
