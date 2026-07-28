@@ -18,9 +18,9 @@ if (isset($_POST['login'])) {
         $_SESSION['role'] = $data['role'];
 
         if ($data['role'] == 'admin') {
-            header("Location: index.php?page=admin_dashboard");
+            header("Location: login_cahaya.php?page=admin_dashboard");
         } else {
-            header("Location: index.php?page=user_dashboard");
+            header("Location: login_cahaya.php?page=user_dashboard");
         }
         exit;
     } else {

@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
 
-    header("Location: ../../public/index.php");
+    header("Location: ../../public/login_cahaya.php");
     exit;
 }
 
@@ -108,14 +108,14 @@ if (isset($_GET['cari'])) {
     <button class="toggle-btn" onclick="toggleMenu()">☰</button>
 
     <ul>
-        <li><a href="index.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
-        <li><a href="index.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
-        <li><a href="index.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
-        <li><a href="index.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
-        <li><a href="index.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
-        <li><a href="index.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
-        <li><a href="index.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
-        <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+        <li><a href="login_cahaya.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="login_cahaya.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="login_cahaya.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="login_cahaya.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="login_cahaya.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="login_cahaya.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="login_cahaya.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="login_cahaya.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
     </ul>
 
 </div>
@@ -202,7 +202,7 @@ if (isset($_GET['cari'])) {
 
                     <td>
 
-                        <a href="index.php?page=detail_penilaian_user&id=<?= $data['id_sekolah']; ?>">
+                        <a href="login_cahaya.php?page=detail_penilaian_user&id=<?= $data['id_sekolah']; ?>">
 
                             <button
                                 type="button"
@@ -243,7 +243,7 @@ if (isset($_GET['cari'])) {
 
         <h2>Input Penilaian</h2>
 
-        <form action="index.php?page=user_simpan_penilaian" method="POST">
+        <form action="login_cahaya.php?page=user_simpan_penilaian" method="POST">
 
             <input
                 type="hidden"

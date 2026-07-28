@@ -5,7 +5,7 @@ session_start();
 /* CEK LOGIN ADMIN */
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 
-    header("Location: ../../public/index.php");
+    header("Location: ../../public/login_cahaya.php");
     exit;
 }
 
@@ -71,7 +71,7 @@ mysqli_query(
 
 /* KEMBALI */
 header(
-    "Location: index.php?page=sekolah_admin"
+    "Location: login_cahaya.php?page=sekolah_admin"
 );
 
 exit;

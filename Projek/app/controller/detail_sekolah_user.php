@@ -46,7 +46,7 @@ $totalMurid = mysqli_num_rows(
 <html lang="id">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pelatih</title>
+    <title>Detail Sekolah</title>
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -58,14 +58,14 @@ $totalMurid = mysqli_num_rows(
     <button class="toggle-btn" onclick="toggleMenu()">☰</button>
 
     <ul>
-        <li><a href="index.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
-        <li><a href="index.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
-        <li><a href="index.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
-        <li><a href="index.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
-        <li><a href="index.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
-        <li><a href="index.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
-        <li><a href="index.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
-        <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+        <li><a href="login_cahaya.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="login_cahaya.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="login_cahaya.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="login_cahaya.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="login_cahaya.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="login_cahaya.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="login_cahaya.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="login_cahaya.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
     </ul>
 
 </div>
@@ -226,7 +226,7 @@ $totalMurid = mysqli_num_rows(
                         <td>
 
                         <a
-                            href="index.php?page=hapus_murid&id=<?= $murid['id_murid']; ?>&id_sekolah=<?= $id_sekolah; ?>"
+                            href="login_cahaya.php?page=hapus_murid&id=<?= $murid['id_murid']; ?>&id_sekolah=<?= $id_sekolah; ?>"
                             onclick="return confirm('Yakin ingin menghapus murid ini?')"
                         >
 
@@ -272,7 +272,7 @@ $totalMurid = mysqli_num_rows(
         <!-- BUTTON KEMBALI -->
         <div class="detail-button">
 
-            <a href="index.php?page=user_sekolah">
+            <a href="login_cahaya.php?page=user_sekolah">
 
                 <button
                     type="button"
@@ -317,7 +317,7 @@ $totalMurid = mysqli_num_rows(
         <h2>Edit Sekolah</h2>
 
         <form
-            action="index.php?page=update_sekolah"
+            action="login_cahaya.php?page=update_sekolah"
             method="POST"
         >
 
@@ -413,7 +413,7 @@ $totalMurid = mysqli_num_rows(
         <h2>Tambah Murid</h2>
 
         <form
-            action="index.php?page=simpan_murid"
+            action="login_cahaya.php?page=simpan_murid"
             method="POST"
         >
 

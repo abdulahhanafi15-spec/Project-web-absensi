@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "../app/controller/koneksi.php";
+include "../app/controller/koneksi2.php";
 include "../routes/routes.php";
 include "../config/base.php";
 

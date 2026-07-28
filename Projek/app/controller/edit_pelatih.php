@@ -41,7 +41,7 @@ if (isset($_POST['update'])) {
     );
 
     header(
-        "Location: index.php?page=detail_pelatih&id=$id"
+        "Location: login_cahaya.php?page=detail_pelatih&id=$id"
     );
 }
 

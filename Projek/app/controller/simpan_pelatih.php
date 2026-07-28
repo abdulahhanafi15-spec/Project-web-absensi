@@ -27,7 +27,7 @@ if (mysqli_num_rows($cek) > 0) {
     echo "
         <script>
             alert('NIP sudah digunakan!');
-            window.location='index.php?page=pelatih_admin';
+            window.location='login_cahaya.php?page=pelatih_admin';
         </script>
     ";
     exit;
@@ -90,6 +90,6 @@ mysqli_query(
 
 /* REDIRECT */
 header(
-    "Location: index.php?page=pelatih_admin"
+    "Location: login_cahaya.php?page=pelatih_admin"
 );
 exit;

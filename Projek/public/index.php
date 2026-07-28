@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include "../routes/routes.php";
 include "../config/base.php";
 
@@ -10,7 +12,7 @@ include "../config/base.php";
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absensi Cahaya Cakra Archery</title>
+    <title>Website Absensi</title>
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     

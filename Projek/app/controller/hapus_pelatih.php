@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 /* VALIDASI ADMIN */
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 
-    header("Location: ../../public/index.php");
+    header("Location: ../../public/login_cahaya.php");
     exit;
 }
 
@@ -71,7 +71,7 @@ mysqli_query(
 /* ===================================== */
 
 header(
-    "Location: index.php?page=pelatih_admin"
+    "Location: login_cahaya.php?page=pelatih_admin"
 );
 
 exit;

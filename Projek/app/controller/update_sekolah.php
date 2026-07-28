@@ -28,7 +28,7 @@ mysqli_query(
 );
 
 header(
-    "Location: index.php?page=detail_sekolah&id=$id_sekolah"
+    "Location: login_cahaya.php?page=detail_sekolah&id=$id_sekolah"
 );
 
 exit;

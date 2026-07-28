@@ -145,7 +145,7 @@ echo "
 
 alert('Absensi berhasil disimpan.');
 
-window.location='index.php?page=user_detail_absensi&id=".$id_sekolah."&bulan=".$bulanDipilih."';
+window.location='login_cahaya.php?page=user_detail_absensi&id=".$id_sekolah."&bulan=".$bulanDipilih."';
 
 </script>
 

@@ -12,7 +12,7 @@ if (!$conn) {
 }
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../../public/index.php");
+    header("Location: ../../public/login_cahaya.php");
     exit;
 }
 
@@ -115,7 +115,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
 
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Detail Pelatih</title>
+    <title>Detail Absensi</title>
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -129,15 +129,15 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
     <button class="toggle-btn" onclick="toggleMenu()">☰</button>
 
     <ul>
-        <li><a href="index.php?page=admin_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
-        <li><a href="index.php?page=struktur"><span>👥</span><span class="text">Struktur</span></a></li>
-        <li><a href="index.php?page=pelatih_admin"><span>📋</span><span class="text">Karyawan</span></a></li>
-        <li><a href="index.php?page=sekolah_admin"><span>🏫</span><span class="text">Sekolah</span></a></li>
-        <li><a href="index.php?page=absensi"><span>📅</span><span class="text">Absensi</span></a></li>
-        <li><a href="index.php?page=laporan"><span>📊</span><span class="text">Laporan</span></a></li>
-        <li><a href="index.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
-        <li><a href="index.php?page=penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
-        <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+        <li><a href="login_cahaya.php?page=admin_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="login_cahaya.php?page=struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="login_cahaya.php?page=pelatih_admin"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="login_cahaya.php?page=sekolah_admin"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="login_cahaya.php?page=absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="login_cahaya.php?page=laporan"><span>📊</span><span class="text">Laporan</span></a></li>
+        <li><a href="login_cahaya.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="login_cahaya.php?page=penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="login_cahaya.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
     </ul>
 
 </div>
@@ -191,7 +191,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
         </div>
 
         <form
-            action="index.php?page=simpan_absensi"
+            action="login_cahaya.php?page=simpan_absensi"
             method="POST"
         >
 
@@ -389,7 +389,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
                 <br>
 
                 <!-- BUTTON KEMBALI -->
-                <a href="index.php?page=absensi">
+                <a href="login_cahaya.php?page=absensi">
 
                     <button
                         type="button"

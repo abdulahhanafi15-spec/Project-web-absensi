@@ -111,7 +111,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
 
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Detail Pelatih</title>
+    <title>Detail Absensi</title>
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -125,14 +125,14 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
     <button class="toggle-btn" onclick="toggleMenu()">☰</button>
 
     <ul>
-        <li><a href="index.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
-        <li><a href="index.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
-        <li><a href="index.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
-        <li><a href="index.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
-        <li><a href="index.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
-        <li><a href="index.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
-        <li><a href="index.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
-        <li><a href="index.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
+        <li><a href="login_cahaya.php?page=user_dashboard"><span>🏠</span><span class="text">Dashboard</span></a></li>
+        <li><a href="login_cahaya.php?page=user_struktur"><span>👥</span><span class="text">Struktur</span></a></li>
+        <li><a href="login_cahaya.php?page=user_pelatih"><span>📋</span><span class="text">Karyawan</span></a></li>
+        <li><a href="login_cahaya.php?page=user_sekolah"><span>🏫</span><span class="text">Sekolah</span></a></li>
+        <li><a href="login_cahaya.php?page=user_absensi"><span>📅</span><span class="text">Absensi</span></a></li>
+        <li><a href="login_cahaya.php?page=user_setting"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
+        <li><a href="login_cahaya.php?page=user_penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
+        <li><a href="login_cahaya.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
     </ul>
 
 </div>
@@ -186,7 +186,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
         </div>
 
         <form
-            action="index.php?page=simpan_absensi_user"
+            action="login_cahaya.php?page=simpan_absensi_user"
             method="POST"
         >
 
@@ -383,7 +383,7 @@ while ($row = mysqli_fetch_assoc($queryAbsensi)) {
                 <br>
 
                 <!-- BUTTON KEMBALI -->
-                <a href="index.php?page=user_absensi">
+                <a href="login_cahaya.php?page=user_absensi">
 
                     <button
                         type="button"

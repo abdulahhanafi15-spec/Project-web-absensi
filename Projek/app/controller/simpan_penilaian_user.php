@@ -125,7 +125,7 @@ else{
    KEMBALI
 ====================================== */
 
-header("Location: index.php?page=detail_penilaian_user&id=".$id_sekolah."&bulan=".$bulan."&tahun=".$tahun);
+header("Location: login_cahaya.php?page=detail_penilaian_user&id=".$id_sekolah."&bulan=".$bulan."&tahun=".$tahun);
 
 exit;
 

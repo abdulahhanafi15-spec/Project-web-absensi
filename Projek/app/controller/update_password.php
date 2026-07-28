@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
         <script>
             alert('Password berhasil diubah');
-            window.location.href='index.php?page=setting_admin';
+            window.location.href='login_cahaya.php?page=setting_admin';
         </script>";
 
     } else {
