@@ -31,8 +31,9 @@ include "../config/base.php";
     <div class="login-box">
         <a href="login_GSIPJ.php">
             <img src="/img/GSIPJ.png" alt="Logo Gerak Silat Inti Putra Jakarta" style="display:block; margin:auto; width:128px; height:auto; padding-bottom:20px;">
-        </a>
+        
         <h2>Login Gerak Silat Inti Putra Jakarta</h2>
+        </a>
     </div>
 
 </div>
