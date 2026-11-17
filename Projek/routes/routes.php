@@ -41,4 +41,7 @@ $routes = [
     'user_detail_absensi' => '../app/controller/detail_absensi_user.php',
     'simpan_absensi_user' => '../app/controller/simpan_absensi_user.php',
     'user_simpan_penilaian' => '../app/controller/simpan_penilaian_user.php',
+    'invoice' => '../resources/views/admin/invoice.php',
+    'invoice_data' => '../resources/views/admin/data_invoice.php',
+    'invoice_simpan' => '../app/controller/invoice_simpan.php',
 ];

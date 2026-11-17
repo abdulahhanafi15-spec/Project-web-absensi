@@ -123,6 +123,12 @@ $querySekolah = mysqli_query(
         </li>
 
         <li>
+            <a href="login_cahaya.php?page=invoice">
+                <span>💰</span>
+                <span class="text">Invoice</span>
+            </a>
+
+        <li>
             <a href="login_cahaya.php?page=setting_admin">
                 <span>⚙️</span>
                 <span class="text">Pengaturan</span>

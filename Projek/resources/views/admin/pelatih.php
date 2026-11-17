@@ -69,10 +69,10 @@ if (isset($_GET['cari'])) {
         <li><a href="login_cahaya.php?page=sekolah_admin"><span>🏫</span><span class="text">Sekolah</span></a></li>
         <li><a href="login_cahaya.php?page=absensi"><span>📅</span><span class="text">Absensi</span></a></li>
         <li><a href="login_cahaya.php?page=laporan"><span>📊</span><span class="text">Laporan</span></a></li>
+        <li><a href="login_cahaya.php?page=invoice"><span>💰</span><span class="text">Invoice</span></a></li>
         <li><a href="login_cahaya.php?page=setting_admin"><span>⚙️</span><span class="text">Pengaturan</span></a></li>
         <li><a href="login_cahaya.php?page=penilaian"><span>⭐</span><span class="text">Penilaian</span></a></li>
         <li><a href="login_cahaya.php?page=logout"><span>🚪</span><span class="text">Logout</span></a></li>
-    </ul>
 
 </div>
 
